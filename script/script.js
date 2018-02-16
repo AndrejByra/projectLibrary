@@ -7,7 +7,7 @@
 		infoHeight = $("#logInInfo").height();
 	infoHeight += logoHeight + 20;
 
-	console.log(infoHeight);
 	$("#logInBox").css({height : infoHeight});
 
+	
 })(jQuery);

@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Log In SOVY</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../style/login.css">
+	<link rel="stylesheet" href="../style/log.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Roboto+Condensed:300,400,700" rel="stylesheet">
 </head>
 <body>
@@ -17,12 +17,13 @@
 			<div id="logo"> <a href="../index.html"><img src="../img/logInLogo.png" alt="SOVYLibrary Logo"></a> </div>	
 			<div id="logInInfo">
 				
-				<!-- <hr class="line"> -->
 				<input id="enterLogin" type="text" name="enterLogin" placeholder="Enter your login">
 				<input id="enterPassword" type="text" name="enterPassword" placeholder="Enter your password">
+				<div class="error">Invalid login or password</div>
 				<hr class="line">
 
 				<button id="loginBtn" class="infoBtn" type="submit">Log In</button>
+				<div id="or">or</div> 
 				<button id="signupBtn" class="infoBtn">Sign Up</button>
 			</div>
 		</div>
