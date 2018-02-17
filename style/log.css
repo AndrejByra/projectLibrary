@@ -8,9 +8,9 @@ body {
 
 #wrapper {
 	background-color: #E5E5E5;
-	top: 0; left: 0;
+	top: 0; left: 0; right: 0; bottom: 0;
+	position: absolute;
 	width: 100%;
-    height: 100%;
 }
 
 #logInBox {
@@ -21,7 +21,6 @@ body {
 }
 
 #logo {
-	/*background-color: #8D8D8D;*/
 	padding: 0;
 	text-align: center;
 	height: 100px;
@@ -62,7 +61,7 @@ body {
 }
 
 .line {
-	border: .5px solid #D6D6D6;
+	border: .5px solid #CDCDCD;
 	width: calc(80% + 20px);
 }
 
@@ -117,27 +116,44 @@ body {
 	height: 100%;
 	margin: auto;
 	text-align: center;
+	top: 0; left: 0; right: 0; border: 0;
+}
+
+#signUp #logo {
+	height: 90px;
+	line-height: 90px;
+	padding-top: 4%;
+}
+
+.text {
+	width: 100%;
 }
 
 .text img {
 	width: 30px;
 	vertical-align: middle;
-	padding: 0 10px;
+	padding: 0 10px 0 0;
 
 }
+
 .text input {
-	width: 40%;
+	width: 58%;
 	height: 35px;
 	line-height: 35px;
-	padding: 3px 10px;
+	padding: 2px 10px;
 	font-size: 14px;
 	letter-spacing: .5px;
 	border-radius: 5px;
 	border: 1px solid #8D8D8D;
 	color: #8D8D8D;
 	transition: all .3s ease-in-out;
-	margin-top: 10px;
+	margin-top: 5px;
 }
+
+.about input {
+	width: calc(29% - 12.5px);
+}
+
 .text input:focus {
 	outline: none;
 	border: 1px solid #993636;
@@ -155,11 +171,23 @@ body {
 #button button {
 	font-family: 'Roboto Condensed', sans-serif;
 	background-color: #993636; 
-	color: #333333;
-	width: 215px;
-	margin-top: 25px;
+	width: 61%;
+	margin-top: 5px;
 	color: #fff;
 }
 #button button:hover {
 	background-color: #8F2D2D;
+}
+
+#button button:last-child {
+	background-color: #DFA3A3;
+	color: #333333;
+}
+#button button:last-child:hover {
+	background-color: #DB9797;
+}
+
+#signUp .line {
+	margin: 15px auto 10px;
+	width: 61%;
 }
