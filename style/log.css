@@ -84,8 +84,12 @@ body {
 
 .infoBtn:last-child {
 	background-color: #DFA3A3; 
-	color: #333333;
 	margin-top: 0;
+}
+
+.infoBtn a:last-child {	
+	color: #333333;
+	text-decoration: none;
 }
 
 #loginBtn:hover {
@@ -102,11 +106,9 @@ body {
 	line-height: 30px;
 }
 
-.error {
-	font-size: 15px;
-	letter-spacing: .3px;
-	color: #8F2D2D;
-	display: none;
+#error {
+	color: #BC3636;	
+	letter-spacing: .5px;
 }
 
 /*SIGN UP*/
