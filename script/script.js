@@ -31,7 +31,6 @@
 	$("#sendBtn").click(function(){
     var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 		emailValue = $("#email").val();
-	console.log(emailValue);
 
 		if(emailRegex.test(emailValue) == true)
 			$("#email").css({border: "2px solid green", borderRadius: 5});
@@ -52,5 +51,9 @@
 	infoHeight += logoHeight + 20;
 
 	$("#logInBox").css({height : infoHeight});
-	
+
+	$(".dropdown").hover(function(){
+		$(".dropdown-content").stop().slideToggle();
+	});
+
 })(jQuery);
