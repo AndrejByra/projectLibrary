@@ -56,8 +56,9 @@ public class Book {
     public String getGenres(Genre genre){
         System.out.println(genre);
         List<String>list= new MySQL().getGenre(genre);
+        System.out.println(list);
         boolean b= false;
-        String result= "Genres({\"name\":[";
+        String result= "Genres({\"genre\":[";
         for(String temp:list){
             if(b==true){
                 result+=',';

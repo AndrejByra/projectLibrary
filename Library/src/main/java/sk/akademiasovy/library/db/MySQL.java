@@ -15,6 +15,7 @@ public class MySQL {
     private String url="jdbc:mysql://localhost:3306/library";
     private String username="root";
     private String password="";
+
     public List<String> getBook(){
         List<String> list = new ArrayList<>();
         try {
@@ -55,13 +56,15 @@ public class MySQL {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url,username,password);
             String query = "SELECT detailsOfBook from books_details WHERE Genre LIKE ?";;
-            System.out.println(query);
-            System.out.println(String.valueOf(genre));
+
+
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, String.valueOf(genre));
+            ps.setString(1,genre.getGenre());
+            System.out.println(genre);
+            System.out.println(query);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                String name=rs.getString("books");
+                String name=rs.getString("detailsOfBook");
                 list.add(name);
             }
 
