@@ -1,5 +1,7 @@
 package sk.akademiasovy.library.db;
 
+import sk.akademiasovy.library.Genre;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,7 +20,7 @@ public class MySQL {
         try {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url,username,password);
-            String query = "SELECT Name from books";
+            String query = "SELECT NAME from books";
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
@@ -42,6 +44,27 @@ public class MySQL {
                 String name=rs.getString("author");
                 list.add(name);
             }
+        }catch(Exception ex){
+            System.out.println("Error: "+ ex.getMessage());
+        }
+        return list;
+    }
+    public List<String> getGenre(Genre genre){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url,username,password);
+            String query = "SELECT detailsOfBook from books_details WHERE Genre LIKE ?";;
+            System.out.println(query);
+            System.out.println(String.valueOf(genre));
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, String.valueOf(genre));
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                String name=rs.getString("books");
+                list.add(name);
+            }
+
         }catch(Exception ex){
             System.out.println("Error: "+ ex.getMessage());
         }

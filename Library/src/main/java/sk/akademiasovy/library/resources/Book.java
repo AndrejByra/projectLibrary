@@ -1,11 +1,9 @@
 package sk.akademiasovy.library.resources;
 
+import sk.akademiasovy.library.Genre;
 import sk.akademiasovy.library.db.MySQL;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -37,7 +35,7 @@ public class Book {
     @Produces(MediaType.APPLICATION_JSON)
     public String getAuthor(){
         MySQL mySQL=new MySQL();
-        List<String> list= mySQL.getBook();
+        List<String> list= mySQL.getAuthor();
         System.out.println(list);
         boolean b= false;
         String result= "func({\"Author Name \":[";
@@ -50,6 +48,26 @@ public class Book {
         }
 
         result+="]})";
+        return result;
+    }
+    @POST
+    @Path("/genres")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getGenres(Genre genre){
+        System.out.println(genre);
+        List<String>list= new MySQL().getGenre(genre);
+        boolean b= false;
+        String result= "Genres({\"name\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }
+            else
+                b=true;
+            result+="\""+temp+"\"";
+        }
+        result+="]})";
+
         return result;
     }
 }
