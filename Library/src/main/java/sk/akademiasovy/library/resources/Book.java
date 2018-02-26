@@ -1,5 +1,6 @@
 package sk.akademiasovy.library.resources;
 
+import sk.akademiasovy.library.Author;
 import sk.akademiasovy.library.BookName;
 import sk.akademiasovy.library.Genre;
 import sk.akademiasovy.library.db.MySQL;
@@ -11,7 +12,7 @@ import java.util.List;
 @Path("/book")
 public class Book {
     @GET
-    @Path("/all")
+    @Path("/allbook")
     @Produces(MediaType.APPLICATION_JSON)
     public String getBook(){
         MySQL mySQL=new MySQL();
@@ -32,7 +33,7 @@ public class Book {
     }
 
     @GET
-    @Path("/author")
+    @Path("/allauthor")
     @Produces(MediaType.APPLICATION_JSON)
     public String getAuthor(){
         MySQL mySQL=new MySQL();
@@ -52,7 +53,7 @@ public class Book {
         return result;
     }
     @POST
-    @Path("/genres")        // treba vypisat nazvy knih namiesto info o knihach
+    @Path("/genres")
     @Produces(MediaType.APPLICATION_JSON)
     public String getGenres(Genre genre){
         System.out.println(genre);
@@ -73,12 +74,33 @@ public class Book {
         return result;
     }
     @POST
+    @Path("/authors")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAuthorname(Author authorname){
+        System.out.println(authorname);
+        List<String>list= new MySQL().getAuthorname(authorname);
+        System.out.println(list);
+        boolean b= false;
+        String result= "({\"Books\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }
+            else
+                b=true;
+            result+="\""+temp+"\"";
+        }
+        result+="]})";
+
+        return result;
+    }
+    @POST
     @Path("/allInfoAboutBook")      // vytahovanie vsetkych informacii v Json
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllInfoAboutBook(BookName bookName){
         System.out.println(bookName);
         List<String>list= new MySQL().getAllInfoAboutBook(bookName);
-        System.out.println(list);
+        System.out.println("list"+list);
         boolean b= false;
         String result= "({\"All information about book\":[";
         int i=0;
