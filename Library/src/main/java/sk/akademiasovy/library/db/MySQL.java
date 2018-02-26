@@ -56,8 +56,7 @@ public class MySQL {
         try {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url,username,password);
-            String query = "SELECT detailsOfBook from books_details WHERE Genre LIKE ?";;
-
+            String query = "select name from books inner join books_details on books.id = books_details.id where genre LIKE ?";;
 
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1,genre.getGenre());
@@ -65,7 +64,7 @@ public class MySQL {
             System.out.println(query);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                String name=rs.getString("detailsOfBook");
+                String name=rs.getString("name");
                 list.add(name);
             }
 
@@ -76,28 +75,20 @@ public class MySQL {
     }
     public List<String> getAllInfoAboutBook(BookName bookName){
         List<String> list = new ArrayList<>();
-        class Info{
-            String Author = "";
-            String Namebook = "";
-
-        }
         try {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url,username,password);
             String query = "SELECT author from books WHERE name LIKE ?";;
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1,bookName.getBookname());
-            System.out.println(bookName);
-            System.out.println(query);
             ResultSet rs=ps.executeQuery();
             rs.next();
-                String name=rs.getString("author");
-            String query2 = "SELECT name from books WHERE name LIKE ?";;
+            String name=rs.getString("author");
+            list.add(name);
+            query = "SELECT name from books WHERE name LIKE ?";;
             PreparedStatement ps2 = conn.prepareStatement(query);
-            ps.setString(1,bookName.getBookname());
-            System.out.println(bookName);
-            System.out.println(query2);
-            rs = ps2.executeQuery();
+            ps2.setString(1,bookName.getBookname());
+            rs=ps2.executeQuery();
             rs.next();
             String name2=rs.getString("name");
             list.add(name2);

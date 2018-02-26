@@ -81,11 +81,11 @@ public class Book {
         System.out.println(list);
         boolean b= false;
         String result= "({\"All information about book\":[";
+        int i=0;
         for(String temp:list){
             if(b==true){
                 result+=',';
-            }
-            else
+            }else
                 b=true;
             result+="\""+temp+"\"";
         }
