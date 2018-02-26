@@ -1,0 +1,238 @@
+html,
+body {
+	font-family: 'Roboto Condensed', sans-serif;
+	padding: 0; margin: 0;
+	background-color: #E5E5E5;
+}
+
+p {
+	margin: 0; padding: 0;
+}
+
+#wrapper {
+	background-color: #E5E5E5;
+	width: 100%;
+}
+
+#nav {
+	position: fixed;
+	top: 0; left: 0; right: 0;
+	z-index: 1000;
+	width: 100%;
+	height: 70px;
+	line-height: 70px;
+	background-color: #993636;
+}
+
+#nav a {
+	text-decoration: none;
+	color: #fff;
+	text-transform: uppercase;
+	font-family: 'Roboto Condensed', sans-serif;
+	letter-spacing: 1px;
+	font-size: 17px;
+	transition: all .15s ease-in-out;
+}
+
+#rightNav a {
+	margin: 0 15px;
+}
+
+#leftNav a:first-child {
+	margin-left: 0;
+}
+
+
+#leftNav,
+#rightNav {
+	width: calc(46.5% - 72px);
+	display: inline-block;    
+}
+
+#navUser {
+	display: inline-block;
+	position: absolute;
+	margin-top: 25px;
+	width: 7%;
+}
+
+#leftNav {
+	padding-left: 70px;
+}
+#rightNav {
+	text-align: right;
+	padding-right: 70px;
+	padding-left: 7%;
+}
+
+#rightNav button {
+	background: none;
+	border: 0;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-size: 17px;
+	letter-spacing: 1px;
+	font-family: 'Roboto Condensed', sans-serif;
+	padding: 0;
+}
+#rightNav a:nth-child(3) {
+	margin-right: 0;
+}
+
+#leftNav img {
+	width: 35%;
+	vertical-align: middle;
+	margin-bottom: 2px;
+}
+
+/*DROPDOWN*/
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #E5E5E5;
+	border-right: 1px solid #C8C8C8;
+	border-left: 1px solid #C8C8C8;
+	border-bottom: 1px solid #C8C8C8;
+    z-index: 1;
+    top: 70px;
+}
+
+#rightNav a:first-child {
+	padding: 0;
+}
+
+#rightNav .dropdown-content a {
+    text-decoration: none;
+    text-align: left;	
+    display: block;
+    margin: 0;
+    max-width: 100%;
+    padding: 0 15px;
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    transition: all .15s ease-in-out;
+    color: #8E8E8E;
+}
+
+#rightNav .dropdown-content a:hover {
+	background-color: #8E8E8E;
+	color: #fff;
+}
+
+/*BOOK WRAPPER*/
+#bookWrapper {
+	position: relative;
+	top: 70px;
+	max-width: 65%;
+	margin: 50px auto;
+}
+
+#cover {
+	max-width: 30%;
+	display: inline-block;
+	float: left;
+}
+
+#cover img {
+	width: 100%;
+}
+
+#aboutBook {
+	max-width: calc(70% - 45px);
+	display: inline-block;
+	padding-left: 5px;
+}
+
+#nameofbook {
+	width: 100%;
+	background-color: #8E8E8E;
+	color: #fff ;
+	padding: 15px 20px;
+	font-size: 30px;
+	text-transform: uppercase;
+	font-weight: bold;
+	letter-spacing: 1px;
+
+}
+
+#author {
+	width: 100%;
+	background-color: #C8C8C8;
+	color: #232323;
+	padding: 10px 20px;
+	letter-spacing: .3px;
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 5px;
+}
+
+#isbn,
+#genre {
+	width: 100%;
+	background-color: #C8C8C8;
+	color: #232323;
+	font-size: 17px;
+	font-weight: bold;
+	padding: 8px 20px;
+	letter-spacing: .3px;
+}
+
+#isbn {
+	padding: 0 20px;
+}
+
+#detailofbook {
+	width: 100%;
+	background-color: rgba(255,255,255, .9);
+	padding: 10px 20px;
+	letter-spacing: .3px;
+	line-height: 20px;
+	font-size: 17px;
+	margin-top: 5px;
+}
+
+#available {
+	width: 100%;
+	background-color: #7DD283;
+	color: #232323;
+	letter-spacing: .5px;
+	font-size: 17px;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding: 10px 20px;
+	margin-top: 5px;
+}
+
+#borrow {
+	text-align: right;
+	width: 100%;
+	padding: 0 0 0 40px;
+}
+
+#borrow button {
+	padding: 10px 20px;
+	margin-top: 5px;
+	font-size: 18px;
+	letter-spacing: 2px;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-family: 'Roboto Condensed', sans-serif;
+	border: 0;
+	background-color: #993636;
+	color: #fff;
+	cursor: pointer;
+	transition: all .3s ease-in-out;
+}
+#borrow button:hover {
+	border-radius: 5px;
+	background-color: #791919;
+}
+
+
