@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	<div id="wrapper">
+	<div id="wrapperSignUp">
 		
 		<div id="signUp">
 			<div id="logo">
@@ -18,41 +18,43 @@
 			</div> 
 				
 			<div class="text about">
-				<!-- <img src="../img/icons/007-round.png"> -->
-				<input type="text" name="firstName" placeholder="First name">
-				<input type="text" name="lastName" placeholder="Last name">
-			</div>
-
-			<div class="text">
-				<!-- <img src="../img/icons/006-email.png"> -->
-				<input id="email" type="text" name="email" placeholder="example@example.com">
+				<input id="firstName" type="text" name="firstName" placeholder="First name">
+				<input id="lastName" type="text" name="lastName" placeholder="Last name">
+				<div class="nameErr error"></div>
 			</div>
 
 			<div class="text about">
-				<!-- <img src="../img/icons/005-padlock.png"> -->
-				<input type="password" name="password" placeholder="Password">
-				<input type="password" name="confirmPassword" placeholder="Confirm password">
+				<input id="password" type="password" name="password" placeholder="Password (8 char min)">
+				<input id="confirmPassword" type="password" name="confirmPassword" placeholder="Confirm password">
+				<div class="passwordErr error"></div>
+			</div>
+
+			<div class="text">
+				<input type="text" name="" placeholder="Login">
+			</div>
+
+			<div class="text">
+				<input id="email" type="text" name="email" placeholder="example@example.com">
+				<div class="emailErr error"></div>
 			</div>
 		
 
 			<div class="text">
-				<!-- <img src="../img/icons/004-phone-symbol-of-an-auricular-inside-a-circle.png"> -->
-				<input type="text" name="phoneNumber" placeholder="e.g. 0900 123 456">
+				<input id="phoneNumber" type="text" name="phoneNumber" placeholder="e.g. 0900 123 456">
+				<div class="phoneNumberErr error"></div>
 			</div>
 				
 			<div class="text">
-				<!-- <img src="../img/icons/003-address-book-contacts.png"> -->
-				<input type="text" name="adressLine" placeholder="Adress line">
+				<input id="adressLine" type="text" name="adressLine" placeholder="Adress line">
 			</div>
 			
 			<div class="text">
-				<!-- <img src="../img/icons/002-location-point.png"> -->
-				<input type="text" name="townCity" placeholder="Town / City">
+				<input id="townCity" type="text" name="townCity" placeholder="Town / City">
 			</div>
 
 			<div class="text">
-				<!-- <img src="../img/icons/001-home-button.png"> -->
-				<input type="text" name="postcode" placeholder="Postcode">
+				<input id="postcode" type="text" name="postcode" placeholder="Postcode">
+				<div class="adress error"></div>
 			</div>
 			
 			<hr class="line">
