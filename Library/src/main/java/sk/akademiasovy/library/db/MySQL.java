@@ -3,6 +3,7 @@ package sk.akademiasovy.library.db;
 import sk.akademiasovy.library.Author;
 import sk.akademiasovy.library.BookName;
 import sk.akademiasovy.library.Genre;
+import sk.akademiasovy.library.User;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +15,7 @@ import java.util.List;
 public class MySQL {
     private Connection conn;
     private String driver = "com.mysql.jdbc.Driver";
-    private String url="jdbc:mysql://localhost:3306/library";
+    private String url="jdbc:mysql://localhost:3306/library?autoReconnect=true&useSSL=false";
     private String username="root";
     private String password="";
 
@@ -143,6 +144,35 @@ public class MySQL {
         }
         return list;
     }
+    public User getUser(String username, String password){
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, this.username, this.password);
+
+            String query = "SELECT * from users where username like ? and password like ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1,username);
+            ps.setString(2,password);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                User user=new User(rs.getString("name"),rs.getString("surename"),rs.getString("username"),rs.getString("email"),
+                        rs.getString("phone"),rs.getString("adress"));
+                query = "UPDATE tokens SET token=? WHERE idu=?";
+                ps = conn.prepareStatement(query);
+                ps.setString(1, user.getToken());
+                ps.setInt(2,rs.getInt("id"));
+
+                ps.executeUpdate();
+                System.out.println(ps);
+                return user;
+            }
+            return null;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 
 }
