@@ -5,10 +5,7 @@ import sk.akademiasovy.library.BookName;
 import sk.akademiasovy.library.Genre;
 import sk.akademiasovy.library.User;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,12 +33,12 @@ public class MySQL {
         }
         return list;
     }
-    public List<String> getAuthor(){
+    public List<String> getAllAuthor(){
         List<String> list = new ArrayList<>();
         try {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url,username,password);
-            String query = "SELECT Author from books";
+            String query = "SELECT author from books";
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
@@ -53,92 +50,176 @@ public class MySQL {
         }
         return list;
     }
-    public List<String> getGenre(Genre genre){
-        List<String> list = new ArrayList<>();
+
+    public List<String> getGenres(String genre) throws SQLException {
+        List<String> list = new ArrayList<String>();
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url,username,password);
-            String query = "select name from books inner join books_details on books.id = books_details.id where genre LIKE ?";;
 
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "select name from books inner join books_details on books.id = books_details.id where genre LIKE '" +genre+ "'";
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1,genre.getGenre());
-            System.out.println(genre);
-            System.out.println(query);
-            ResultSet rs=ps.executeQuery();
-            while(rs.next()){
-                String name=rs.getString("name");
-                list.add(name);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String g = rs.getString("name");
+
+                list.add(g);
+
+
+                System.out.println(g);
             }
 
-        }catch(Exception ex){
-            System.out.println("Error: "+ ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
         }
+
+
         return list;
+
     }
-    public List<String> getAuthorname(Author author){
-        List<String> list = new ArrayList<>();
+    public List<String> getAuthorBook(String name) throws SQLException {
+        List<String> list = new ArrayList<String>();
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url,username,password);
-            String query = "select name from books inner join books_details on books.id = books_details.id where author LIKE ?";;
 
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "select name from books where author LIKE '%" +name+ "%'";
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1,author.getAuthorname());
-            System.out.println(query);
-            ResultSet rs=ps.executeQuery();
-            while(rs.next()){
-                String name=rs.getString("name");
-                list.add(name);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String g = rs.getString("name");
+
+                list.add(g);
+
+
+                System.out.println(g);
             }
 
-        }catch(Exception ex){
-            System.out.println("Error: "+ ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
         }
+
+
         return list;
+
     }
-    public List<String> getAllInfoAboutBook(BookName bookName){
+
+    public String getName(String bookName) {
+        String result = "";
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "select author from books where name like '" +bookName+ "'";
+            PreparedStatement p = conn.prepareStatement(query);
+            ResultSet rs = p.executeQuery();
+            while(rs.next())
+                result = rs.getString("author");
+        } catch (Exception e) {
+            System.out.println("Error: " +e.getMessage());
+        }
+        return result;
+    }
+
+    public List<String> getInfoAboutBook(String bookname){
         List<String> list = new ArrayList<>();
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url,username,password);
-            String query = "SELECT author from books WHERE name LIKE ?";;
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1,bookName.getBookname());
-            ResultSet rs=ps.executeQuery();
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "select author from books where name like ?";
+            PreparedStatement p = conn.prepareStatement(query);
+            p.setString(1,bookname);
+            ResultSet rs = p.executeQuery();
             rs.next();
-            String name=rs.getString("author");
-            list.add(name);
-            query = "SELECT name from books WHERE name LIKE ?";;
-            PreparedStatement ps2 = conn.prepareStatement(query);
-            ps2.setString(1,bookName.getBookname());
-            rs=ps2.executeQuery();
-            rs.next();
-            String name2=rs.getString("name");
-            list.add(name2);
+            String author=rs.getString("author");
             System.out.println("1");
-            query = "SELECT isbn FROM  books_details INNER JOIN books ON books_details.books = books.name LIKE ?";;
-            PreparedStatement ps3 = conn.prepareStatement(query);
-            ps3.setString(1,bookName.getBookname());
-            rs=ps3.executeQuery();
+            list.add(author);
+            System.out.println("2");
+            query = "select name from books where name like ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1,bookname);
+            ResultSet rs2 = ps.executeQuery();
             rs.next();
-            String name3=rs.getString("isbn");
-            list.add(name3);
-            query = "SELECT genre FROM  books_details INNER JOIN books ON books_details.books = books.name LIKE ?";;
+            System.out.println("3");
+            String name=rs2.getString("name");
+            list.add(name);
+            query = "SELECT isbn FROM  books_details INNER JOIN books ON books_details.books = books.name LIKE ?";
             PreparedStatement ps4 = conn.prepareStatement(query);
-            ps4.setString(1,bookName.getBookname());
-            rs=ps4.executeQuery();
+            ps.setString(1,bookname);
+            ResultSet rs4 = ps4.executeQuery();
+            System.out.println("5");
             rs.next();
-            String name4=rs.getString("genre");
-            list.add(name4);
-            query = "SELECT image FROM  books_details INNER JOIN books ON books_details.books = books.name LIKE ?";;
+            String genre=rs4.getString("genre");
+            list.add(genre);
+            query = "SELECT image FROM  books_details INNER JOIN books ON books_details.books = books.name LIKE '" + bookname+"'";
             PreparedStatement ps5 = conn.prepareStatement(query);
-            ps5.setString(1,bookName.getBookname());
-            rs=ps5.executeQuery();
+            ResultSet rs5 = ps5.executeQuery();
+            System.out.println("6");
             rs.next();
-            String name5=rs.getString("image");
-            list.add(name5);
-            System.out.println(list);
+            String image=rs5.getString("image");
+            list.add(image);
+            query = "SELECT info FROM  books_details INNER JOIN books ON books_details.books = books.name LIKE '" + bookname+"'";
+            PreparedStatement ps6 = conn.prepareStatement(query);
+            ResultSet rs6 = ps6.executeQuery();
+            System.out.println("7");
+            rs.next();
+            String info=rs6.getString("info");
+            list.add(info);
+            System.out.println("8");
+        } catch (Exception e) {
+            System.out.println("Error: " +e.getMessage());
+        }
 
+        return list;
+    }
+
+    public List<String> getBorroweBook(){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url,username,password);
+            String query = "Select name from books INNER JOIN record ON books.id = record.idb";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                String name=rs.getString("name");
+                list.add(name);
+            }
+        }catch(Exception ex){
+            System.out.println("Error: "+ ex.getMessage());
+        }
+        return list;
+    }
+    public List<String> getFreeBook(){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url,username,password);
+            String query = "Select name from books INNER JOIN record ON books.id != record.idb";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                String name=rs.getString("name");
+                list.add(name);
+            }
+        }catch(Exception ex){
+            System.out.println("Error: "+ ex.getMessage());
+        }
+        return list;
+    }
+    public List<String> getAllusers(){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url,username,password);
+            String query = "Select name from books INNER JOIN record ON books.id != record.idb";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                String name=rs.getString("name");
+                list.add(name);
+            }
         }catch(Exception ex){
             System.out.println("Error: "+ ex.getMessage());
         }
