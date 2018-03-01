@@ -92,4 +92,16 @@
 		$(".dropdown-content").stop().slideToggle();
 	});
 
+	// $("#books").on("mouseenter", ".book", function(){
+	// 	$(this).first().css({
+	// 		transform: "scale(1.04)"
+	// 	})
+	// });
+	// $("#books").on("mouseleave", ".book", function(){
+	// 	$(this).first().css({
+	// 		transform: "scale(1)"
+	// 	})
+	// });
+
+
 })(jQuery);

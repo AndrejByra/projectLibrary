@@ -2,6 +2,7 @@ html,
 body {
 	padding: 0; margin: 0;
 	background-color: #e5e5e5;
+	font-family: 'Roboto Condensed', sans-serif;
 }
 
 #wrapper {
@@ -115,4 +116,71 @@ body {
 #books {
 	position: relative;
 	top: 70px;
+	max-width: 90%;
+	margin: 55px auto;
+}
+
+.book {
+	display: inline-block;
+	width: calc(20% - 14px);
+	margin: 7px;
+	position: relative;
+}
+
+.book img {
+	display: block;
+    width: 100%;
+    height: auto;
+	box-shadow: 0 0 5px 2px #8E8E8E;
+	transition: all .3s ease-in-out;
+}
+
+.bookCover {
+	position: absolute;
+    top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	background-color: rgba(0,0,0,.9);
+	transition: all .3s ease-in-out;
+	text-align: center;
+}
+
+.book:hover .bookCover {
+  opacity: 1;
+}
+
+span.bookName {
+	display: block;
+	color: #fff;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 22px;
+	letter-spacing: 1px;
+	padding: 50% 15px 0;
+}
+
+.btnLend {
+	margin-top: 20px;
+	border: 4px solid #fff;
+	font-size: 18px;
+	padding: 7px 25px;
+	text-transform: uppercase;
+	font-weight: bold;
+	letter-spacing: .5px;
+	color: #fff;
+	font-family: 'Roboto Condensed', sans-serif;
+	cursor: pointer;
+	transition: all .3s ease-in-out;
+	background-color: #fff;
+	color: #000;
+	border-radius: 5px;
+}
+.btnLend:hover {
+	border: 4px solid #fff;
+	background-color: rgba(0,0,0,.1);
+	color: #fff;
 }
