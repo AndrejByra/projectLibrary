@@ -207,6 +207,26 @@ public class Book {
 
         return result;
     }
+    @GET
+    @Path("/infostatus/{book}")     //input bookname output Status
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getInfoStatus(@PathParam("book") String bookname) {
+
+        List<String>list= new MySQL().getInfoStatus(bookname);
+        System.out.println("list"+list);
+        boolean b= false;
+        String result= "({\"Status\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }else
+                b=true;
+            result+="\""+temp+"\"";
+        }
+        result+="]})";
+
+        return result;
+    }
 
 
     @GET

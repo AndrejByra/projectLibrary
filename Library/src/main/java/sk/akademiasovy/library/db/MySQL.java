@@ -222,6 +222,26 @@ public class MySQL {
 
         return list;
     }
+    public List<String> getInfoStatus(String bookname){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "select status from books where name LIKE ?";
+            PreparedStatement p = conn.prepareStatement(query);
+            p.setString(1,bookname);
+            ResultSet rs = p.executeQuery();
+            rs.next();
+            String isbn=rs.getString("status");
+            System.out.println(isbn);
+            list.add(isbn);
+
+        } catch (Exception e) {
+            System.out.println("Error: " +e.getMessage());
+        }
+
+        return list;
+    }
     public List<String> getusername(String user){
         List<String> list = new ArrayList<>();
         try {
