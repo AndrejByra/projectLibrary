@@ -208,6 +208,109 @@ public class Book {
         return result;
     }
 
+
+    @GET
+    @Path("/getUserName/{user}")     //input USERNAME output NAME
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getuserName(@PathParam("user") String user) {
+
+        List<String>list= new MySQL().getusername(user);
+        System.out.println("list"+list);
+        boolean b= false;
+        String result= "({\"username\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }else
+                b=true;
+            result+="\""+temp+"\"";
+        }
+        result+="]})";
+
+        return result;
+    }
+    @GET
+    @Path("/getSurename/{user}")     //input USERNAME output SURENAME
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getsurename(@PathParam("user") String user) {
+
+        List<String>list= new MySQL().getsurename(user);
+        System.out.println("list"+list);
+        boolean b= false;
+        String result= "({\"Surename\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }else
+                b=true;
+            result+="\""+temp+"\"";
+        }
+        result+="]})";
+
+        return result;
+    }
+    @GET
+    @Path("/getPhone/{user}")     //input USERNAME output PHONE
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getphone(@PathParam("user") String user) {
+
+        List<String>list= new MySQL().getphone(user);
+        System.out.println("list"+list);
+        boolean b= false;
+        String result= "({\"Surename\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }else
+                b=true;
+            result+="\""+temp+"\"";
+        }
+        result+="]})";
+
+        return result;
+    }
+    @GET
+    @Path("/getEmail/{user}")     //input USERNAME output EMAIL
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getemail(@PathParam("user") String user) {
+
+        List<String>list= new MySQL().getemail(user);
+        System.out.println("list"+list);
+        boolean b= false;
+        String result= "({\"Email\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }else
+                b=true;
+            result+="\""+temp+"\"";
+        }
+        result+="]})";
+
+        return result;
+    }
+    @GET
+    @Path("/getadress/{user}")     //input USERNAME output ADRESS
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getcity(@PathParam("user") String user) {
+
+        List<String>list= new MySQL().getadress(user);
+        System.out.println("list vo vypise "+list);
+        boolean b= false;
+        String result= "({\"Adress\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }else
+                b=true;
+            result+="\""+temp+"\"";
+        }
+        result+="]})";
+
+        return result;
+    }
+
+
     @GET
     @Path("/borrowed")       //show all borrowed books
     @Produces(MediaType.APPLICATION_JSON)
@@ -248,25 +351,6 @@ public class Book {
         result+="]})";
         return result;
     }
-    @GET
-    @Path("/alluser")       //show all users NOT WORKING
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getusers(){
-        MySQL mySQL=new MySQL();
-        List<String> list= mySQL.getAllusers();
-        System.out.println(list);
-        boolean b= false;
-        String result= "getusers({\"name\":[";
-        for(String temp:list){
-            if(b == true){
-                result+=',';
-            } else
-                b = true;
-            result+="\""+temp+"\"";
-        }
 
-        result+="]})";
-        return result;
-    }
 
 }

@@ -222,6 +222,106 @@ public class MySQL {
 
         return list;
     }
+    public List<String> getusername(String user){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "select name from users INNER JOIN users_details ON users.id = users_details.IDuser where username like ?";
+            PreparedStatement p = conn.prepareStatement(query);
+            p.setString(1,user);
+            ResultSet rs = p.executeQuery();
+            rs.next();
+            String name=rs.getString("name");
+            System.out.println(name);
+            list.add(name);
+
+        } catch (Exception e) {
+            System.out.println("Error: " +e.getMessage());
+        }
+
+        return list;
+    }
+    public List<String> getsurename(String user){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "select surename from users INNER JOIN users_details ON users.id = users_details.IDuser where username like ?";
+            PreparedStatement p = conn.prepareStatement(query);
+            p.setString(1,user);
+            ResultSet rs = p.executeQuery();
+            rs.next();
+            String surename=rs.getString("surename");
+            System.out.println(surename);
+            list.add(surename);
+
+        } catch (Exception e) {
+            System.out.println("Error: " +e.getMessage());
+        }
+
+        return list;
+    }
+    public List<String> getphone(String user){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "select phone from users INNER JOIN users_details ON users.id = users_details.IDuser where username like ?";
+            PreparedStatement p = conn.prepareStatement(query);
+            p.setString(1,user);
+            ResultSet rs = p.executeQuery();
+            rs.next();
+            String surename=rs.getString("phone");
+            System.out.println(surename);
+            list.add(surename);
+
+        } catch (Exception e) {
+            System.out.println("Error: " +e.getMessage());
+        }
+
+        return list;
+    }
+    public List<String> getemail(String user){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "select email from users INNER JOIN users_details ON users.id = users_details.IDuser where username like ?";
+            PreparedStatement p = conn.prepareStatement(query);
+            p.setString(1,user);
+            ResultSet rs = p.executeQuery();
+            rs.next();
+            String email=rs.getString("email");
+            System.out.println(email);
+            list.add(email);
+
+        } catch (Exception e) {
+            System.out.println("Error: " +e.getMessage());
+        }
+
+        return list;
+    }
+    public List<String> getadress(String user){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "select adress from users INNER JOIN users_details ON users.id = users_details.IDuser where username like ?";
+            PreparedStatement p = conn.prepareStatement(query);
+            p.setString(1,user);
+            ResultSet rs = p.executeQuery();
+            rs.next();
+            String adress=rs.getString("adress");
+            System.out.println(adress);
+            list.add(adress);
+
+        } catch (Exception e) {
+            System.out.println("Error: " +e.getMessage());
+        }
+
+        return list;
+    }
 
     public List<String> getBorroweBook(){
         List<String> list = new ArrayList<>();
@@ -257,23 +357,10 @@ public class MySQL {
         }
         return list;
     }
-    public List<String> getAllusers(){
-        List<String> list = new ArrayList<>();
-        try {
-            Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url,username,password);
-            String query = "Select name from books INNER JOIN record ON books.id != record.idb";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs=ps.executeQuery();
-            while(rs.next()){
-                String name=rs.getString("name");
-                list.add(name);
-            }
-        }catch(Exception ex){
-            System.out.println("Error: "+ ex.getMessage());
-        }
-        return list;
-    }
+
+
+
+            //login - registration etc...
     public User getUser(String username, String password){
         try {
             Class.forName(driver).newInstance();
