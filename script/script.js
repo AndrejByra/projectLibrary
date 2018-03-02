@@ -37,6 +37,10 @@
 			lastName = $("#lastName").val(),
 			password = $("#password").val(),
 			confirmPassword = $("#confirmPassword").val(),
+			login = $("#login").val(),
+			addressLine = $("#addressLine").val(),
+			townCity = $("#townCity").val(),
+			postcode = $("#postcode").val(),
 			phoneNumberRegex = /^(\d{9,20})$/,
 			phoneNumber = $("#phoneNumber").val();
 
@@ -49,7 +53,7 @@
 		}
 
 		if(nameRegex.test(firstName) == false || nameRegex.test(lastName) == false){
-			$(".nameErr").text("Invalid first or last name.");
+			$(".nameErr").text("Invalid first or last name. Must contain at least 2 characters.");
 			error = true;
 		}
 		else {
@@ -72,6 +76,18 @@
 			$(".phoneNumberErr").text("");
 		}
 
+		if(login.length < 4)
+			$(".loginErr").text("Login must contain at least 4 characters.");
+		else {
+			$(".loginErr").text("");
+		}
+
+		if(addressLine.length < 2 || townCity.length < 2 || postcode.length < 3)
+			$(".addressErr").text("Invalid address.")
+		else {
+			$(".addressErr").text("");
+		}
+
 	});
 
 	$("#resetBtn").click(function(){
@@ -92,16 +108,22 @@
 		$(".dropdown-content").stop().slideToggle();
 	});
 
-	// $("#books").on("mouseenter", ".book", function(){
-	// 	$(this).first().css({
-	// 		transform: "scale(1.04)"
-	// 	})
-	// });
-	// $("#books").on("mouseleave", ".book", function(){
-	// 	$(this).first().css({
-	// 		transform: "scale(1)"
-	// 	})
-	// });
+	// SCROLL
+	$("#leftNav a").click(function() {
+		console.log("#"+$(this).text());
+	    $('html, body').animate({
+	        scrollTop: $("#"+$(this).text()).offset().top
+	    }, 1000);
+	});
+
+	$(window).scroll(function(){
+        if($(window).scrollTop() > $(window).height()){
+            $("#nav").css({"background-color":"rgba(153,54,54,1)"});
+        }
+        else {
+            $("#nav").css({"background-color":"transparent"});
+        }
+    })
 
 
 })(jQuery);
