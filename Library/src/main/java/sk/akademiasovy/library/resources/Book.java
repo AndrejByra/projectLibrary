@@ -106,16 +106,96 @@ public class Book {
         String result = "{\"name\":\""+name+"\"}";
         return result;
     }
-
+            //informacie o knihe
     @GET
-    @Path("/info/{book}")     //input bookname output all info NOT WORKING CORRECTLY
+    @Path("/infoauthor/{book}")     //input bookname output author
     @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoAboutBook(@PathParam("book") String bookname) {
+    public String getInfoAuthor(@PathParam("book") String bookname) {
 
-        List<String>list= new MySQL().getInfoAboutBook(bookname);
+        List<String>list= new MySQL().getInfoAuthor(bookname);
         System.out.println("list"+list);
         boolean b= false;
-        String result= "({\"All information about book\":[";
+        String result= "({\"Author\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }else
+                b=true;
+            result+="\""+temp+"\"";
+        }
+        result+="]})";
+
+        return result;
+    }
+    @GET
+    @Path("/infoabout/{book}")     //input bookname output about book
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getInfoAbout(@PathParam("book") String bookname) {
+
+        List<String>list= new MySQL().getInfoAbout(bookname);
+        System.out.println("list"+list);
+        boolean b= false;
+        String result= "({\"About\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }else
+                b=true;
+            result+="\""+temp+"\"";
+        }
+        result+="]})";
+
+        return result;
+    }
+    @GET
+    @Path("/infogenre/{book}")     //input bookname output genre
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getInfoGenre(@PathParam("book") String bookname) {
+
+        List<String>list= new MySQL().getInfoGenre(bookname);
+        System.out.println("list"+list);
+        boolean b= false;
+        String result= "({\"Genre\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }else
+                b=true;
+            result+="\""+temp+"\"";
+        }
+        result+="]})";
+
+        return result;
+    }
+    @GET
+    @Path("/infophoto/{book}")     //input bookname output photo
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getInfoPhoto(@PathParam("book") String bookname) {
+
+        List<String>list= new MySQL().getInfoPhoto(bookname);
+        System.out.println("list"+list);
+        boolean b= false;
+        String result= "({\"Genre\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }else
+                b=true;
+            result+="\""+temp+"\"";
+        }
+        result+="]})";
+
+        return result;
+    }
+    @GET
+    @Path("/infoisbn/{book}")     //input bookname output isbn
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getInfoISBN(@PathParam("book") String bookname) {
+
+        List<String>list= new MySQL().getInfoISBN(bookname);
+        System.out.println("list"+list);
+        boolean b= false;
+        String result= "({\"ISBN\":[";
         for(String temp:list){
             if(b==true){
                 result+=',';
@@ -169,7 +249,7 @@ public class Book {
         return result;
     }
     @GET
-    @Path("/users")       //show all users
+    @Path("/alluser")       //show all users NOT WORKING
     @Produces(MediaType.APPLICATION_JSON)
     public String getusers(){
         MySQL mySQL=new MySQL();
