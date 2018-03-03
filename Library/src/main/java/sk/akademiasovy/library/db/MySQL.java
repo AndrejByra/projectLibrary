@@ -142,99 +142,60 @@ public class MySQL {
 
         return list;
     }
-    public List<String> getInfoAbout(String bookname){
+    public List<String> getInfoAboutBook(String bookname){
         List<String> list = new ArrayList<>();
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            String query = "select detailsOfBook from books_details inner join books on books.id = books_details.id where name LIKE ?";
+            conn = DriverManager.getConnection(url,username,password);
+
+            String query = "select name from books where name like ?";
             PreparedStatement p = conn.prepareStatement(query);
             p.setString(1,bookname);
             ResultSet rs = p.executeQuery();
             rs.next();
-            String detailsOfBook=rs.getString("detailsOfBook");
-            System.out.println(detailsOfBook);
-            list.add(detailsOfBook);
-
-        } catch (Exception e) {
-            System.out.println("Error: " +e.getMessage());
-        }
-
-        return list;
-    }
-    public List<String> getInfoGenre(String bookname){
-        List<String> list = new ArrayList<>();
-        try {
-            Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            String query = "select genre from books_details inner join books on books.id = books_details.id where name LIKE ?";
-            PreparedStatement p = conn.prepareStatement(query);
-            p.setString(1,bookname);
-            ResultSet rs = p.executeQuery();
-            rs.next();
-            String genre=rs.getString("genre");
-            System.out.println(genre);
-            list.add(genre);
-
-        } catch (Exception e) {
-            System.out.println("Error: " +e.getMessage());
-        }
-
-        return list;
-    }
-    public List<String> getInfoPhoto(String bookname){
-        List<String> list = new ArrayList<>();
-        try {
-            Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            String query = "select image from books_details inner join books on books.id = books_details.id where name LIKE ?";
-            PreparedStatement p = conn.prepareStatement(query);
-            p.setString(1,bookname);
-            ResultSet rs = p.executeQuery();
-            rs.next();
-            String image=rs.getString("image");
-            System.out.println(image);
+            String image = rs.getString("name");
             list.add(image);
 
-        } catch (Exception e) {
-            System.out.println("Error: " +e.getMessage());
-        }
 
-        return list;
-    }
-    public List<String> getInfoISBN(String bookname){
-        List<String> list = new ArrayList<>();
-        try {
-            Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            String query = "select isbn from books_details inner join books on books.id = books_details.id where name LIKE ?";
-            PreparedStatement p = conn.prepareStatement(query);
+            query = "select author from books where name like ?";
+            p = conn.prepareStatement(query);
             p.setString(1,bookname);
-            ResultSet rs = p.executeQuery();
+            rs = p.executeQuery();
             rs.next();
-            String isbn=rs.getString("isbn");
-            System.out.println(isbn);
+            String author = rs.getString("author");
+            list.add(author);
+
+            query = "SELECT isbn FROM  books_details INNER JOIN books ON books_details.books = books.name LIKE ?";
+            p = conn.prepareStatement(query);
+            p.setString(1,bookname);
+            rs = p.executeQuery();
+            rs.next();
+            String isbn = rs.getString("isbn");
             list.add(isbn);
 
-        } catch (Exception e) {
-            System.out.println("Error: " +e.getMessage());
-        }
-
-        return list;
-    }
-    public List<String> getInfoStatus(String bookname){
-        List<String> list = new ArrayList<>();
-        try {
-            Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            String query = "select status from books where name LIKE ?";
-            PreparedStatement p = conn.prepareStatement(query);
+            query = "select genre from books_details inner join books on books.id = books_details.id where name LIKE ?";
+            p = conn.prepareStatement(query);
             p.setString(1,bookname);
-            ResultSet rs = p.executeQuery();
+            rs = p.executeQuery();
             rs.next();
-            String isbn=rs.getString("status");
-            System.out.println(isbn);
-            list.add(isbn);
+            String genre = rs.getString("genre");
+            list.add(genre);
+
+            query = "SELECT detailsOfBook FROM  books_details INNER JOIN books ON books_details.books = books.name LIKE ?";
+            p = conn.prepareStatement(query);
+            p.setString(1,bookname);
+            rs = p.executeQuery();
+            rs.next();
+            String info = rs.getString("detailsOfBook");
+            list.add(info);
+
+            query = "select status from books where name like ?";
+            p = conn.prepareStatement(query);
+            p.setString(1,bookname);
+            rs = p.executeQuery();
+            rs.next();
+            String status = rs.getString("status");
+            list.add(status);
 
         } catch (Exception e) {
             System.out.println("Error: " +e.getMessage());
@@ -242,99 +203,77 @@ public class MySQL {
 
         return list;
     }
-    public List<String> getusername(String user){
+
+    public List<String> getUserInfo(String user){
         List<String> list = new ArrayList<>();
         try {
             Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            String query = "select name from users INNER JOIN users_details ON users.id = users_details.IDuser where username like ?";
+            conn = DriverManager.getConnection(url,username,password);
+
+            String query = "select name from users where username like ?";
             PreparedStatement p = conn.prepareStatement(query);
             p.setString(1,user);
             ResultSet rs = p.executeQuery();
             rs.next();
-            String name=rs.getString("name");
-            System.out.println(name);
-            list.add(name);
+            String image = rs.getString("name");
+            list.add(image);
 
-        } catch (Exception e) {
-            System.out.println("Error: " +e.getMessage());
-        }
 
-        return list;
-    }
-    public List<String> getsurename(String user){
-        List<String> list = new ArrayList<>();
-        try {
-            Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            String query = "select surename from users INNER JOIN users_details ON users.id = users_details.IDuser where username like ?";
-            PreparedStatement p = conn.prepareStatement(query);
+            query = "select surename from users where username like ?";
+            p = conn.prepareStatement(query);
             p.setString(1,user);
-            ResultSet rs = p.executeQuery();
+            rs = p.executeQuery();
             rs.next();
-            String surename=rs.getString("surename");
-            System.out.println(surename);
+            String surename = rs.getString("surename");
             list.add(surename);
 
-        } catch (Exception e) {
-            System.out.println("Error: " +e.getMessage());
-        }
-
-        return list;
-    }
-    public List<String> getphone(String user){
-        List<String> list = new ArrayList<>();
-        try {
-            Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            String query = "select phone from users INNER JOIN users_details ON users.id = users_details.IDuser where username like ?";
-            PreparedStatement p = conn.prepareStatement(query);
+            query = "select username from users where username like ?";
+            p = conn.prepareStatement(query);
             p.setString(1,user);
-            ResultSet rs = p.executeQuery();
+            rs = p.executeQuery();
             rs.next();
-            String surename=rs.getString("phone");
-            System.out.println(surename);
-            list.add(surename);
+            String username = rs.getString("username");
+            list.add(username);
 
-        } catch (Exception e) {
-            System.out.println("Error: " +e.getMessage());
-        }
-
-        return list;
-    }
-    public List<String> getemail(String user){
-        List<String> list = new ArrayList<>();
-        try {
-            Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            String query = "select email from users INNER JOIN users_details ON users.id = users_details.IDuser where username like ?";
-            PreparedStatement p = conn.prepareStatement(query);
+            query = "select email from users_details INNER JOIN users ON users_details.IDuser = users.id where username like ?";
+            p = conn.prepareStatement(query);
             p.setString(1,user);
-            ResultSet rs = p.executeQuery();
+            rs = p.executeQuery();
             rs.next();
-            String email=rs.getString("email");
-            System.out.println(email);
+            String email = rs.getString("email");
             list.add(email);
 
-        } catch (Exception e) {
-            System.out.println("Error: " +e.getMessage());
-        }
-
-        return list;
-    }
-    public List<String> getadress(String user){
-        List<String> list = new ArrayList<>();
-        try {
-            Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            String query = "select adress from users INNER JOIN users_details ON users.id = users_details.IDuser where username like ?";
-            PreparedStatement p = conn.prepareStatement(query);
+            query = "select phone from users_details INNER JOIN users ON users_details.IDuser = users.id where username like ?;";
+            p = conn.prepareStatement(query);
             p.setString(1,user);
-            ResultSet rs = p.executeQuery();
+            rs = p.executeQuery();
             rs.next();
-            String adress=rs.getString("adress");
-            System.out.println(adress);
+            String phone = rs.getString("phone");
+            list.add(phone);
+
+            query = "select adress from users_details INNER JOIN users ON users_details.IDuser = users.id where username like ?";
+            p = conn.prepareStatement(query);
+            p.setString(1,user);
+            rs = p.executeQuery();
+            rs.next();
+            String adress = rs.getString("adress");
             list.add(adress);
+
+            query = "select town from users_details INNER JOIN users ON users_details.IDuser = users.id where username like ?";
+            p = conn.prepareStatement(query);
+            p.setString(1,user);
+            rs = p.executeQuery();
+            rs.next();
+            String town = rs.getString("town");
+            list.add(town);
+
+            query = "select postcode from users_details INNER JOIN users ON users_details.IDuser = users.id where username like ?";
+            p = conn.prepareStatement(query);
+            p.setString(1,user);
+            rs = p.executeQuery();
+            rs.next();
+            String postcode = rs.getString("postcode");
+            list.add(postcode);
 
         } catch (Exception e) {
             System.out.println("Error: " +e.getMessage());

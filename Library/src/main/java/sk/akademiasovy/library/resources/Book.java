@@ -106,16 +106,16 @@ public class Book {
         String result = "{\"name\":\""+name+"\"}";
         return result;
     }
-            //informacie o knihe
-    @GET
-    @Path("/infoauthor/{book}")     //input bookname output author
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoAuthor(@PathParam("book") String bookname) {
 
-        List<String>list= new MySQL().getInfoAuthor(bookname);
+    @GET
+    @Path("/info/{book}")     //input bookname output all info NOT WORKING CORRECTLY
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getInfoAboutBook(@PathParam("book") String bookname) {
+
+        List<String>list= new MySQL().getInfoAboutBook(bookname);
         System.out.println("list"+list);
         boolean b= false;
-        String result= "({\"Author\":[";
+        String result= "getInfo({\"all\":[";
         for(String temp:list){
             if(b==true){
                 result+=',';
@@ -127,15 +127,16 @@ public class Book {
 
         return result;
     }
-    @GET
-    @Path("/infoabout/{book}")     //input bookname output about book
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoAbout(@PathParam("book") String bookname) {
 
-        List<String>list= new MySQL().getInfoAbout(bookname);
+    @GET
+    @Path("/userinfo/{user}")     //input username output all
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getUserInfo(@PathParam("user") String user) {
+
+        List<String>list= new MySQL().getUserInfo(user);
         System.out.println("list"+list);
         boolean b= false;
-        String result= "({\"About\":[";
+        String result= "getInfo({\"all\":[";
         for(String temp:list){
             if(b==true){
                 result+=',';
@@ -147,189 +148,6 @@ public class Book {
 
         return result;
     }
-    @GET
-    @Path("/infogenre/{book}")     //input bookname output genre
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoGenre(@PathParam("book") String bookname) {
-
-        List<String>list= new MySQL().getInfoGenre(bookname);
-        System.out.println("list"+list);
-        boolean b= false;
-        String result= "({\"Genre\":[";
-        for(String temp:list){
-            if(b==true){
-                result+=',';
-            }else
-                b=true;
-            result+="\""+temp+"\"";
-        }
-        result+="]})";
-
-        return result;
-    }
-    @GET
-    @Path("/infophoto/{book}")     //input bookname output photo
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoPhoto(@PathParam("book") String bookname) {
-
-        List<String>list= new MySQL().getInfoPhoto(bookname);
-        System.out.println("list"+list);
-        boolean b= false;
-        String result= "({\"Genre\":[";
-        for(String temp:list){
-            if(b==true){
-                result+=',';
-            }else
-                b=true;
-            result+="\""+temp+"\"";
-        }
-        result+="]})";
-
-        return result;
-    }
-    @GET
-    @Path("/infoisbn/{book}")     //input bookname output isbn
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoISBN(@PathParam("book") String bookname) {
-
-        List<String>list= new MySQL().getInfoISBN(bookname);
-        System.out.println("list"+list);
-        boolean b= false;
-        String result= "({\"ISBN\":[";
-        for(String temp:list){
-            if(b==true){
-                result+=',';
-            }else
-                b=true;
-            result+="\""+temp+"\"";
-        }
-        result+="]})";
-
-        return result;
-    }
-    @GET
-    @Path("/infostatus/{book}")     //input bookname output Status
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoStatus(@PathParam("book") String bookname) {
-
-        List<String>list= new MySQL().getInfoStatus(bookname);
-        System.out.println("list"+list);
-        boolean b= false;
-        String result= "({\"Status\":[";
-        for(String temp:list){
-            if(b==true){
-                result+=',';
-            }else
-                b=true;
-            result+="\""+temp+"\"";
-        }
-        result+="]})";
-
-        return result;
-    }
-
-
-    @GET
-    @Path("/getUserName/{user}")     //input USERNAME output NAME
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getuserName(@PathParam("user") String user) {
-
-        List<String>list= new MySQL().getusername(user);
-        System.out.println("list"+list);
-        boolean b= false;
-        String result= "({\"username\":[";
-        for(String temp:list){
-            if(b==true){
-                result+=',';
-            }else
-                b=true;
-            result+="\""+temp+"\"";
-        }
-        result+="]})";
-
-        return result;
-    }
-    @GET
-    @Path("/getSurename/{user}")     //input USERNAME output SURENAME
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getsurename(@PathParam("user") String user) {
-
-        List<String>list= new MySQL().getsurename(user);
-        System.out.println("list"+list);
-        boolean b= false;
-        String result= "({\"Surename\":[";
-        for(String temp:list){
-            if(b==true){
-                result+=',';
-            }else
-                b=true;
-            result+="\""+temp+"\"";
-        }
-        result+="]})";
-
-        return result;
-    }
-    @GET
-    @Path("/getPhone/{user}")     //input USERNAME output PHONE
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getphone(@PathParam("user") String user) {
-
-        List<String>list= new MySQL().getphone(user);
-        System.out.println("list"+list);
-        boolean b= false;
-        String result= "({\"Surename\":[";
-        for(String temp:list){
-            if(b==true){
-                result+=',';
-            }else
-                b=true;
-            result+="\""+temp+"\"";
-        }
-        result+="]})";
-
-        return result;
-    }
-    @GET
-    @Path("/getEmail/{user}")     //input USERNAME output EMAIL
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getemail(@PathParam("user") String user) {
-
-        List<String>list= new MySQL().getemail(user);
-        System.out.println("list"+list);
-        boolean b= false;
-        String result= "({\"Email\":[";
-        for(String temp:list){
-            if(b==true){
-                result+=',';
-            }else
-                b=true;
-            result+="\""+temp+"\"";
-        }
-        result+="]})";
-
-        return result;
-    }
-    @GET
-    @Path("/getadress/{user}")     //input USERNAME output ADRESS
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getcity(@PathParam("user") String user) {
-
-        List<String>list= new MySQL().getadress(user);
-        System.out.println("list vo vypise "+list);
-        boolean b= false;
-        String result= "({\"Adress\":[";
-        for(String temp:list){
-            if(b==true){
-                result+=',';
-            }else
-                b=true;
-            result+="\""+temp+"\"";
-        }
-        result+="]})";
-
-        return result;
-    }
-
 
     @GET
     @Path("/borrowed")       //show all borrowed books
