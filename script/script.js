@@ -117,13 +117,21 @@
 	});
 
 	$(window).scroll(function(){
-        if($(window).scrollTop() > $(window).height()){
-            $("#nav").css({"background-color":"rgba(153,54,54,1)"});
+        if($(window).scrollTop() > $(window).height()/2+40){
+            $("#navLogo img").show();
         }
         else {
-            $("#nav").css({"background-color":"transparent"});
+            $("#navLogo img").hide();
         }
-    })
+    });
 
+	$(window).scroll(function(){
+        if($(window).scrollTop() > $(window).height()){
+            $(".indexNav").css({"background-color":"rgba(153,54,54,1)"});
+        }
+        else {
+            $(".indexNav").css({"background-color":"transparent"});
+        }
+    });
 
 })(jQuery);

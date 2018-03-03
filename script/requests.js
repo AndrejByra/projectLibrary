@@ -71,100 +71,49 @@
 
 	});	
 
-
 	$("#books").on("click", "button", function(){
+		
 		$("#bookWrapper").empty();
 		var bookName = ($(this).prev().text());
 		$("#books").fadeOut(500);
-		$("#bookWrapper").append("<div id='cover'><img src='../img/books/"+bookName+".jpg'>"+
-			"</div>").append("<div id='aboutBook'><div id='nameofbook'>"+bookName+"</div></div>");
+
 
 		$.ajax({
-			url: 'http://localhost:8080/book/infoauthor/' +bookName,
+			url: 'http://localhost:8080/book/info/' +bookName,
 			data: { },
 			error: function(){
 				alert("Error");
 			},
-			success: getAuthor,
+			success: getInfo,
 			crossDomain: true,
 			dataType: 'jsonp',
-			jsonpCallback: 'getAuthor',
+			jsonpCallback: 'getInfo',
 				contentType: 'application/json',
 				type: 'GET'
 		});
 
-		function getAuthor(data){
-			data.Author.forEach(function(element){
-				$("#aboutBook").append("<div id='author'>Author: "+element+"</div>");
-			});
+		function getInfo(data){
+			console.log(data.all[6]);
+			var status = "";
+
+			if(data.all[6] == 0)
+				status = "<div id='available'>Available</div><div id='borrow'><button>Borrow</button></div>";
+			else 
+				status = "<div id='notAvailable'>Not available</div>";
+			console.log(status);
+
+			$("#bookWrapper").append("<div id='cover'><img src='../img/books/"+data.all[0]+".jpg'></div>");
+			$("#bookWrapper").append("<div id='aboutBook'>"+
+				"<div id='nameofbook'>"+data.all[1]+"</div>"+
+				"<div id='author'>Author: "+data.all[2]+"</div>"+
+				"<div id='isbn'><span>ISBN: </span>"+data.all[3]+"</div>"+
+				"<div id='genre'><span>Genre: </span>"+data.all[4]+"</div>"+
+				"<div id='detailofbook'>"+data.all[5]+"</div>"+
+				status+"</div>");
 		}
-
-		$.ajax({
-			url: 'http://localhost:8080/book/infoisbn/' +bookName,
-			data: { },
-			error: function(){
-				alert("Error");
-			},
-			success: getISBN,
-			crossDomain: true,
-			dataType: 'jsonp',
-			jsonpCallback: 'getISBN',
-				contentType: 'application/json',
-				type: 'GET'
-		});
-
-		function getISBN(data){
-			data.ISBN.forEach(function(element){
-				$("#aboutBook").append("<div id='isbn'><span>ISBN: </span>"+element+"</div>");
-			});
-		}
-
-		$.ajax({
-			url: 'http://localhost:8080/book/infogenre/' +bookName,
-			data: { },
-			error: function(){
-				alert("Error");
-			},
-			success: getInfoGenre,
-			crossDomain: true,
-			dataType: 'jsonp',
-			jsonpCallback: 'getInfoGenre',
-				contentType: 'application/json',
-				type: 'GET'
-		});
-
-		function getInfoGenre(data){
-			data.Genre.forEach(function(element){
-				$("#aboutBook").append("<div id='genre'><span>Genre: </span>"+element+"</div>");
-			});
-		}
-
-		$.ajax({
-			url: 'http://localhost:8080/book/infoabout/' +bookName,
-			data: { },
-			error: function(){
-				alert("Error");
-			},
-			success: infoAbout,
-			crossDomain: true,
-			dataType: 'jsonp',
-			jsonpCallback: 'infoAbout',
-				contentType: 'application/json',
-				type: 'GET'
-		});
-
-		function infoAbout(data){
-			data.About.forEach(function(element){
-				$("#aboutBook").append("<div id='detailofbook'>"+element+"</div>");
-				$("#aboutBook").append("<div id='available'>Available</div>");
-				$("#aboutBook").append("<div id='borrow'><button>Borrow</button></div>");
-			});
-		}
-
-
+	
 		$("#bookWrapper").delay(1000).fadeIn(500);
 	});
-
 
 	// INDEX BOOKS
 	$.ajax({
