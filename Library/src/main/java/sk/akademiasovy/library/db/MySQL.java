@@ -364,6 +364,29 @@ public class MySQL {
         }
     }
 
+    public boolean checkIfEmailOrUsernameExist(String username, String email) {
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, this.username, this.password);
 
+            String query = "SELECT count(*) as num FROM users inner join users_details on users.id=users_details.IDuser WHERE username like ? OR email like ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1,username);
+            ps.setString(2,email);
+            ResultSet rs=ps.executeQuery();
+            System.out.println(ps);
+
+            rs.next();
+            if(rs.getInt("num")==0)
+                return false;  // email and login don't exist
+            else
+                return true;  // login or email is already in database
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return true;
+    }
 
 }
