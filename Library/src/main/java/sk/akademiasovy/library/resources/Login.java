@@ -4,12 +4,10 @@ import sk.akademiasovy.library.Credentials;
 import sk.akademiasovy.library.User;
 import sk.akademiasovy.library.db.MySQL;
 
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-@Path("/book")
+@Path("/login")
 public class Login {
 
         @POST
@@ -27,5 +25,13 @@ public class Login {
             }
 
 
+    }
+    @GET
+    @Path("/logout/{token}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String logout(@PathParam("token")  String token){
+        MySQL mySQL = new MySQL();
+        mySQL.logout( token);
+        return "{}";
     }
     }

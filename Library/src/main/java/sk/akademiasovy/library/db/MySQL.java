@@ -12,7 +12,7 @@ import java.util.List;
 public class MySQL {
     private Connection conn;
     private String driver = "com.mysql.jdbc.Driver";
-    private String url="jdbc:mysql://localhost:3306/library?autoReconnect=true&useSSL=false";
+    private String url="jdbc:mysql://localhost:3306/library";
     private String username="root";
     private String password="";
 
@@ -325,21 +325,22 @@ public class MySQL {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url, this.username, this.password);
 
-            String query = "SELECT * from users where username like ? and password like ?";
+            String query = "SELECT * from( users inner join users_details on users.id= users_details.IDuser) where users.username like ? and password like ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1,username);
             ps.setString(2,password);
+            System.out.println(ps);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 User user=new User(rs.getString("name"),rs.getString("surename"),rs.getString("username"),rs.getString("email"),
-                        rs.getString("phone"),rs.getString("adress"));
+                        rs.getString("phone"),rs.getString("adress"),rs.getString("postcode"),rs.getString("city"));
                 query = "UPDATE tokens SET token=? WHERE idu=?";
                 ps = conn.prepareStatement(query);
                 ps.setString(1, user.getToken());
                 ps.setInt(2,rs.getInt("id"));
-
-                ps.executeUpdate();
                 System.out.println(ps);
+                ps.executeUpdate();
+
                 return user;
             }
             return null;
@@ -347,6 +348,20 @@ public class MySQL {
             e.printStackTrace();
         }
         return null;
+    }
+    public void logout( String token) {
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, this.username, this.password);
+
+            String query = "UPDATE tokens SET token=\"\" where token like ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1,token);
+            System.out.println(ps);
+            ps.executeUpdate();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 
