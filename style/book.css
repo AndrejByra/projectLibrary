@@ -189,12 +189,12 @@ span.bookName {
 #bookWrapper {
 	position: relative;
 	top: 70px;
-	max-width: 65%;
-	margin: 50px auto;
+	max-width: 60%;
+	margin: 55px auto;
 }
 
 #cover {
-	width: 32%;
+	width: 37%;
 	display: inline-block;
 	float: left;
 }
@@ -204,7 +204,7 @@ span.bookName {
 }
 
 #aboutBook {
-	width: calc(68% - 45px);
+	width: calc(63% - 45px);
 	display: inline-block;
 	padding-left: 5px;
 }
@@ -306,3 +306,16 @@ span.bookName {
 	background-color: #791919;
 }
 
+#userImg {
+	position: fixed;
+    z-index: 10000;
+    max-width: 100px;
+    top: 25px;
+    left: 50%;
+    width: auto;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
