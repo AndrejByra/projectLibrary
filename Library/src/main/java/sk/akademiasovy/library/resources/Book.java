@@ -7,6 +7,7 @@ import sk.akademiasovy.library.db.MySQL;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Book {
     @GET
     @Path("/allbook")       //show all books
     @Produces(MediaType.APPLICATION_JSON)
-    public String getBook(){
+    public Response getBook(){
         MySQL mySQL=new MySQL();
         List<String> list= mySQL.getBook();
         System.out.println(list);
@@ -30,12 +31,12 @@ public class Book {
         }
 
         result+="]})";
-        return result;
+        return Response.status(200).build();
     }
     @GET
     @Path("/allauthor")       //show all books
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllAuthor(){
+    public Response getAllAuthor(){
         MySQL mySQL=new MySQL();
         List<String> list= mySQL.getAllAuthor();
         System.out.println(list);
@@ -50,13 +51,13 @@ public class Book {
         }
 
         result+="]})";
-        return result;
+        return Response.status(200).build();
     }
 
     @GET
     @Path("/genre/{genres}")        // input genre output bookname
     @Produces(MediaType.APPLICATION_JSON)
-    public String getGenre(@PathParam("genres")String genre) throws SQLException
+    public Response getGenre(@PathParam("genres")String genre) throws SQLException
     {
         System.out.println(genre);
         List <String> list = new MySQL().getGenres(genre);
@@ -74,13 +75,13 @@ public class Book {
 
         }
         result += "]})";
-        return result;
+        return Response.status(200).build();
     }
 
     @GET
     @Path("/bookauthor/{name}")        // input author output bookname (correnct input is is ful name -
     @Produces(MediaType.APPLICATION_JSON)       //or only part of them
-    public String getAuthorBook(@PathParam("name")String name) throws SQLException
+    public Response getAuthorBook(@PathParam("name")String name) throws SQLException
     {
         System.out.println(name);
         List <String> list = new MySQL().getAuthorBook(name);
@@ -95,22 +96,22 @@ public class Book {
 
         }
         result += "]})";
-        return result;
+        return Response.status(200).build();
     }
     @GET
     @Path("/author/{name}")     //input bookname output author
     @Produces(MediaType.APPLICATION_JSON)
-    public String getName(@PathParam("name") String genre) {
+    public Response getName(@PathParam("name") String genre) {
 
         String name = new MySQL().getName(genre);
         String result = "{\"name\":\""+name+"\"}";
-        return result;
+        return Response.status(200).build();
     }
 
     @GET
     @Path("/info/{book}")     //input bookname output all info NOT WORKING CORRECTLY
     @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoAboutBook(@PathParam("book") String bookname) {
+    public Response getInfoAboutBook(@PathParam("book") String bookname) {
 
         List<String>list= new MySQL().getInfoAboutBook(bookname);
         System.out.println("list"+list);
@@ -125,13 +126,13 @@ public class Book {
         }
         result+="]})";
 
-        return result;
+        return Response.status(200).build();
     }
 
     @GET
     @Path("/userinfo/{user}")     //input username output all
     @Produces(MediaType.APPLICATION_JSON)
-    public String getUserInfo(@PathParam("user") String user) {
+    public Response getUserInfo(@PathParam("user") String user) {
 
         List<String>list= new MySQL().getUserInfo(user);
         System.out.println("list"+list);
@@ -146,13 +147,13 @@ public class Book {
         }
         result+="]})";
 
-        return result;
+        return Response.status(200).build();
     }
 
     @GET
     @Path("/borrowed")       //show all borrowed books
     @Produces(MediaType.APPLICATION_JSON)
-    public String getBorrowedBook(){
+    public Response getBorrowedBook(){
         MySQL mySQL=new MySQL();
         List<String> list= mySQL.getBorroweBook();
         System.out.println(list);
@@ -167,12 +168,12 @@ public class Book {
         }
 
         result+="]})";
-        return result;
+        return Response.status(200).build();
     }
     @GET
     @Path("/free")       //show all free books to borrow
     @Produces(MediaType.APPLICATION_JSON)
-    public String getFreeBook(){
+    public Response getFreeBook(){
         MySQL mySQL=new MySQL();
         List<String> list= mySQL.getFreeBook();
         System.out.println(list);
@@ -187,7 +188,7 @@ public class Book {
         }
 
         result+="]})";
-        return result;
+        return Response.status(200).build();
     }
 
 

@@ -11,6 +11,10 @@ public class Registration {
     public String username;
     @JsonProperty("email")
     public String email;
+    @JsonProperty("phone")
+    public String phone;
+    @JsonProperty("adress")
+    public String adress;
     @JsonProperty("postcode")
     public String postcode;
     @JsonProperty("city")

@@ -1,9 +1,7 @@
 package sk.akademiasovy.library.db;
 
-import sk.akademiasovy.library.Author;
-import sk.akademiasovy.library.BookName;
-import sk.akademiasovy.library.Genre;
-import sk.akademiasovy.library.User;
+import sk.akademiasovy.library.*;
+
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -387,6 +385,35 @@ public class MySQL {
         }
 
         return true;
+    }
+    public void insertNewUserIntoDb(Registration registration) {
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, this.username, this.password);
+            String query = "INSERT INTO users(name, surename, username, password) "+
+                    " VALUES (?,?,?,?)";
+            PreparedStatement ps= conn.prepareStatement(query);
+            ps.setString(1,registration.name);
+            ps.setString(2,registration.surename);
+            ps.setString(3,registration.username);
+            ps.setString(4,registration.password);
+            ps.executeUpdate();
+            query = "INSERT INTO users_details(phone, email, adress, city,postcode) "+
+                    " VALUES (?,?,?,?,?)";
+            PreparedStatement ps1= conn.prepareStatement(query);
+            ps1.setString(1,registration.phone);
+            ps1.setString(2,registration.email);
+            ps1.setString(3,registration.adress);
+            ps1.setString(4,registration.city);
+            ps1.setString(4,registration.postcode);
+
+            ps1.executeUpdate();
+
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 }
