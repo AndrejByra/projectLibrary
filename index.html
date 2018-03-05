@@ -58,8 +58,23 @@
 		</div>
 
 		<div id="contact">
+			<div id="triangle-topleft"></div>
+			<div id="whereToFindUs">
+				<div id="contactWrapper">
+					<div class="whereToFindUsHeader">Where To Find Us?</div>
+					<div class="address">
+						<div class="contactDetails">Contact</div>
+						<div class="lHead">Name:</div>
+						<div class="libraryName lText">SOVY library</div>
+						<div class="lHead">Address:</div>
+						<div class="addressLine lText">Dneperská 1</div>
+						<div class="city lText">040 12 Košice</div>
+						<div class="lHead">Telephone number:</div>
+						<div class="number lText">+421 55 674 48 38</div>
+					</div>
+				</div>
+			</div>
 		    <div id="map"></div>
-
 		</div>
 	</div>
 
@@ -69,10 +84,90 @@
 
 	<script>
       function initMap() {
-        var uluru = {lat: 25.363, lng: 131.044};
+        var uluru = {lat: 48.6878705, lng: 21.28512};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
+          zoom: 8,
+          center: uluru,
+          // styles: [
+          //   {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+          //   {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+          //   {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+          //   {
+          //     featureType: 'administrative.locality',
+          //     elementType: 'labels.text.fill',
+          //     stylers: [{color: '#d59563'}]
+          //   },
+          //   {
+          //     featureType: 'poi',
+          //     elementType: 'labels.text.fill',
+          //     stylers: [{color: '#d59563'}]
+          //   },
+          //   {
+          //     featureType: 'poi.park',
+          //     elementType: 'geometry',
+          //     stylers: [{color: '#263c3f'}]
+          //   },
+          //   {
+          //     featureType: 'poi.park',
+          //     elementType: 'labels.text.fill',
+          //     stylers: [{color: '#6b9a76'}]
+          //   },
+          //   {
+          //     featureType: 'road',
+          //     elementType: 'geometry',
+          //     stylers: [{color: '#38414e'}]
+          //   },
+          //   {
+          //     featureType: 'road',
+          //     elementType: 'geometry.stroke',
+          //     stylers: [{color: '#212a37'}]
+          //   },
+          //   {
+          //     featureType: 'road',
+          //     elementType: 'labels.text.fill',
+          //     stylers: [{color: '#9ca5b3'}]
+          //   },
+          //   {
+          //     featureType: 'road.highway',
+          //     elementType: 'geometry',
+          //     stylers: [{color: '#746855'}]
+          //   },
+          //   {
+          //     featureType: 'road.highway',
+          //     elementType: 'geometry.stroke',
+          //     stylers: [{color: '#1f2835'}]
+          //   },
+          //   {
+          //     featureType: 'road.highway',
+          //     elementType: 'labels.text.fill',
+          //     stylers: [{color: '#f3d19c'}]
+          //   },
+          //   {
+          //     featureType: 'transit',
+          //     elementType: 'geometry',
+          //     stylers: [{color: '#2f3948'}]
+          //   },
+          //   {
+          //     featureType: 'transit.station',
+          //     elementType: 'labels.text.fill',
+          //     stylers: [{color: '#d59563'}]
+          //   },
+          //   {
+          //     featureType: 'water',
+          //     elementType: 'geometry',
+          //     stylers: [{color: '#17263c'}]
+          //   },
+          //   {
+          //     featureType: 'water',
+          //     elementType: 'labels.text.fill',
+          //     stylers: [{color: '#515c6d'}]
+          //   },
+          //   {
+          //     featureType: 'water',
+          //     elementType: 'labels.text.stroke',
+          //     stylers: [{color: '#17263c'}]
+          //   }
+          // ]
         });
         var marker = new google.maps.Marker({
           position: uluru,
@@ -80,7 +175,8 @@
         });
       }
     </script>
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBih9S4LrLUQ5ECo-EXe70XxGj5wCSp1xo&callback=initMap"
-  type="text/javascript"></script>	
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEDfA8YAk55c2yZSdSgszSRaKGWjmbLiw&callback=initMap">
+    </script>	
 </body>
 </html>

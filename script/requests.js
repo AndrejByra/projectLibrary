@@ -221,4 +221,4 @@
 	// function getGenre(data){
 	// 	console.log(data);
 	// }
-	// 
+	

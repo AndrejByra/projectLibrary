@@ -39,7 +39,8 @@ body {
 	font-family: Roboto Condensed Regular, sans-serif;
 	position: relative;
 	background-color: #F0F0F0;
-	box-shadow: 0 0px 14px #8E8E8E;
+	box-shadow: 0 0 14px #8E8E8E;
+	z-index: 10;
 }
 
 #quoteBlock {
@@ -220,7 +221,68 @@ body {
 	padding: 0 30px;
 }
 
+#contact {
+	height: calc(530px);
+}
+
 #map {
-    height: 400px;
-    width: 100%;
+    height: 100%;
+    width: 55%;
+    display: inline-block;
+    position: relative;
+    float: right;
+}
+
+#whereToFindUs {
+	float: left;
+    width: 45%;
+    height: 100%;
+    background-color: #fff;
+    display: inline-block;
+    position: relative;
+}
+
+#contactWrapper {
+    width: 65%;
+    border-radius: 5px;
+    position: relative;
+    background-color: rgba(255,255,255,1);
+    margin: 20% auto 0;
+    left: 10%;
+}
+
+.whereToFindUsHeader {
+	font-size: 50px;
+	letter-spacing: .5px;
+	font-weight: bold;
+
+}
+
+#whereToFindUs .contactDetails {
+	font-size: 35px;
+	letter-spacing: 3px;
+	font-weight: bold;
+}
+#whereToFindUs .lHead {
+	font-size: 20px;
+	letter-spacing: .5px;
+	font-weight: bold;
+	color: #8E8E8E;
+	margin-top: 7px;
+}
+#whereToFindUs .lText {
+	font-size: 18px;
+	letter-spacing: .3px;
+}
+
+#triangle-topleft {
+	width: 0;
+    height: 0;
+    border-top: 530px solid #fff;
+    border-right: 150px solid transparent;
+    display: inline-block;
+    z-index: 9;
+    position: absolute;
+    left: 45%;
+    right: 0;
 }
