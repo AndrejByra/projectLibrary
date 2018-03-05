@@ -1,12 +1,18 @@
 (function($){
 
-
+	// BOOK LENDING
+	$("#bookWrapper").hide();
+	$("#books").hide();
 
 	$("#all, .dropbtn").click(function(event){
 
 		event.preventDefault();
 		$("#books").empty().show();
 		$("#bookWrapper").empty().hide();
+		$("#infoWrapper").hide();
+		$("#nav").css({	"border-bottom" : "0" });
+		$("#userImg").hide();
+
 
 		$.ajax({
 			url: 'http://localhost:8080/book/allbook',
@@ -41,6 +47,9 @@
 		event.preventDefault();
 		$("#books").empty().show();
 		$("#bookWrapper").empty().hide();
+		$("#infoWrapper").hide();
+		$("#nav").css({	"border-bottom" : "0" });
+		$("#userImg").hide();
 
 		var bookId = ((this).id);
 		$.ajax({
@@ -131,14 +140,47 @@
 	});
 
 	function getBooks(data){
-		var num = 1;
-		for (var i = 0; i < data.name.length; i+=2){
-			// $("#books").append("<div class='book book"+num+"'><span class='bookName"+num+"'>"+data.name[i]+"</span></div>");
-				$("#indexBooks").append("<div class='book book"+num+" "+data.name[i]+"'>"+
-					"<img src='img/books/"+data.name[i]+".jpg'></div>");
-			num++;
+		for (var i = 0; i < data.name.length; i+=5){
+			$("#indexBooks").append("<div class='book "+data.name[i]+"'>"+
+				"<img src='img/books/"+data.name[i]+".jpg'></div>");
 		}
 	}
+
+	// USER INFO
+	$.ajax({
+		url: 'http://localhost:8080/book/userinfo/domingo123',
+		data: { },
+		error: function(){
+			alert("Error");
+		},
+		success: getInfo,
+		crossDomain: true,
+		dataType: 'jsonp',
+		jsonpCallback: 'getInfo',
+			contentType: 'application/json',
+			type: 'GET'
+	});
+
+	function getInfo(data){
+		$("#aboutInfo").append("<div class='infoW'><div class='infoHeader'>First name:</div><span>"+data.all[0]+"</span></div>"+
+			"<div class='infoW'><div class='infoHeader'>Last name:</div><span>"+data.all[1]+"</span></div>"+
+			"<div class='infoW'><div class='infoHeader'>Login:</div><span>"+data.all[2]+"</span></div>"+
+			"<div class='infoW'><div class='infoHeader'>E-mail address:</div><span>"+data.all[3]+"</span></div>"+
+			"<div class='infoW'><div class='infoHeader'>Telephone number:</div><span>"+data.all[4]+"</span></div>");
+		$("#address").append("<div class='infoW'><div class='infoHeader'>Address line:</div><span>"+data.all[5]+"</span></div>"+
+			"<div class='infoW'><div class='infoHeader'>Town / City</div><span>"+data.all[6]+"</span></div>"+
+			"<div class='infoW'><div class='infoHeader'>Postcode</div><span>"+data.all[7]+"</span></div>");
+		$("#nav").css({	"border-bottom" : "7px solid #e5e5e5" });
+	}
+
+	$("#profile").click(function(){
+		$("#books").fadeOut(500);
+		$("#bookWrapper").fadeOut(500);
+		$("#infoWrapper").delay(1000).fadeIn(500);
+		$("#nav").css({	"border-bottom" : "7px solid #e5e5e5" });
+		$("#userImg").delay(1000).fadeIn(500);
+	});
+
 
 })(jQuery);
 		// $.ajax({
@@ -179,4 +221,4 @@
 	// function getGenre(data){
 	// 	console.log(data);
 	// }
-	// 
+	

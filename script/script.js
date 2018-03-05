@@ -126,12 +126,11 @@
     });
 
 	$(window).scroll(function(){
-        if($(window).scrollTop() > $(window).height()){
+        if($(window).scrollTop() > $(window).height())
             $(".indexNav").css({"background-color":"rgba(153,54,54,1)"});
-        }
-        else {
+
+        else 
             $(".indexNav").css({"background-color":"transparent"});
-        }
     });
 
 })(jQuery);
