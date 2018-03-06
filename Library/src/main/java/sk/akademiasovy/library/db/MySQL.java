@@ -415,5 +415,26 @@ public class MySQL {
             e.printStackTrace();
         }
     }
+    public List<String> getTime(String bookname){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "select DATE_ADD(date, INTERVAL 90 DAY) DATE from record INNER JOIN books ON record.idb = books.id where name like ?";
+            PreparedStatement p = conn.prepareStatement(query);
+            p.setString(1,bookname);
+            ResultSet rs = p.executeQuery();
+            rs.next();
+            String date=rs.getString("DATE");
+            date = date + 3;
+            System.out.println(date);
+            list.add(date);
+
+        } catch (Exception e) {
+            System.out.println("Error: " +e.getMessage());
+        }
+
+        return list;
+    }
 
 }
