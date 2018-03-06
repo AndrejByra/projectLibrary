@@ -191,5 +191,26 @@ public class Book {
         return Response.status(200).build();
     }
 
+    @GET
+    @Path("/time/{bookname}")     //input username output all
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getTime(@PathParam("bookname") String bookname){
+
+        List<String>list= new MySQL().getTime(bookname);
+        System.out.println("list"+list);
+        boolean b= false;
+        String result= "Date({\"date\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }else
+                b=true;
+            result+="\""+temp+"\"";
+        }
+        result+="]})";
+
+        return result;
+    }
+
 
 }
