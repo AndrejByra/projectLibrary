@@ -8,18 +8,18 @@ public class User {
     private String username;
     private String email;
     private String phone;
-    private String adress;
+    private String address;
     private String postcode;
     private String city;
     private String token;
 
-    public User( String name, String surename, String username, String email, String phone, String adress,String postcode, String city) {
+    public User( String name, String surename, String username, String email, String phone, String address,String postcode, String city) {
         this.name = name;
         this.surename = surename;
         this.username = username;
         this.email = email;
         this.phone = phone;
-        this.adress = adress;
+        this.address = address;
         this.postcode = postcode;
         this.city = city;
         generateToken();
@@ -57,8 +57,8 @@ public class User {
         return phone;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
     public String getPostcode() {

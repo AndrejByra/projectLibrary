@@ -29,7 +29,7 @@ public class Login {
                 result+="\"username\":\""+user.getUsername()+"\" , ";
                 result+="\"email\":\""+user.getEmail()+"\" , ";
                 result+="\"phone\":\""+user.getPhone()+"\" , ";
-                result+="\"adress\":\""+user.getAdress()+"\" , ";
+                result+="\"address\":\""+user.getAddress()+"\" , ";
                 result+="\"city\":\""+user.getCity()+"\" , ";
                 result+="\"postcode\":\""+user.getPostcode()+"\" , ";
                 result+="\"token\":\""+user.getToken()+"\"}";

@@ -378,7 +378,7 @@ public class MySQL {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url, this.username, this.password);
 
-            String query = "SELECT * from( users inner join users_details on users.id= users_details.IDuser) where users.username like ? and password like ?";
+            String query = "SELECT * from users where users.username like ? and password like ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1,username);
             ps.setString(2,password);
@@ -386,7 +386,7 @@ public class MySQL {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 User user=new User(rs.getString("name"),rs.getString("surename"),rs.getString("username"),rs.getString("email"),
-                        rs.getString("phone"),rs.getString("adress"),rs.getString("postcode"),rs.getString("city"));
+                        rs.getString("phone"),rs.getString("address"),rs.getString("postcode"),rs.getString("city"));
                 query = "UPDATE tokens SET token=? WHERE idu=?";
                 ps = conn.prepareStatement(query);
                 ps.setString(1, user.getToken());
@@ -422,7 +422,7 @@ public class MySQL {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url, this.username, this.password);
 
-            String query = "SELECT count(*) as num FROM users inner join users_details on users.id=users_details.IDuser WHERE username like ? OR email like ?";
+            String query = "SELECT count(*) as num FROM users WHERE username like ? OR email like ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1,username);
             ps.setString(2,email);
@@ -445,7 +445,7 @@ public class MySQL {
         try {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url, this.username, this.password);
-            String query = "INSERT INTO users(name, surename, username, password, phone, email, adress, town,postcode) "+
+            String query = "INSERT INTO users(name, surename, username, password, phone, email, address, city,postcode) "+
                     " VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps= conn.prepareStatement(query);
             ps.setString(1,registration.name);
@@ -454,11 +454,10 @@ public class MySQL {
             ps.setString(4,registration.password);
             ps.setString(5,registration.phone);
             ps.setString(6,registration.email);
-            ps.setString(7,registration.adress);
+            ps.setString(7,registration.address);
             ps.setString(8,registration.city);
             ps.setString(9,registration.postcode);
             ps.executeUpdate();
-            System.out.println("1");
 
         }catch(Exception e){
             e.printStackTrace();
