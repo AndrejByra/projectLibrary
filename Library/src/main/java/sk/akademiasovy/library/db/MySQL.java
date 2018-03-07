@@ -280,6 +280,42 @@ public class MySQL {
         return list;
     }
 
+
+    public List<String> getBorrowedby(String user){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url,username,password);
+            String query = "select users.username AS user from books inner join record ON record.idb = books.id inner join users ON users.id = record.idu where username = ?";
+            PreparedStatement p = conn.prepareStatement(query);
+            p.setString(1,user);
+            ResultSet rs = p.executeQuery();
+            rs.next();
+            String name = rs.getString("user");
+            list.add(name);
+
+            query = "select books.name AS name from books inner join record ON record.idb = books.id inner join users ON users.id = record.idu where username = ?";
+            p = conn.prepareStatement(query);
+            p.setString(1,user);
+            rs = p.executeQuery();
+            rs.next();
+            String book = rs.getString("name");
+            list.add(book);
+
+            query = "select record.date AS date from books inner join record ON record.idb = books.id inner join users ON users.id = record.idu where username = ?";
+            p = conn.prepareStatement(query);
+            p.setString(1,user);
+            rs = p.executeQuery();
+            rs.next();
+            String date = rs.getString("date");
+            list.add(date);
+
+        } catch (Exception e) {
+            System.out.println("Error: " +e.getMessage());
+        }
+
+        return list;
+    }
     public List<String> getBorroweBook(){
         List<String> list = new ArrayList<>();
         try {
@@ -314,7 +350,26 @@ public class MySQL {
         }
         return list;
     }
+    public List<String> getTime(String bookname){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "select DATE_ADD(date, INTERVAL 90 DAY) DATE from record INNER JOIN books ON record.idb = books.id where name like ?";
+            PreparedStatement p = conn.prepareStatement(query);
+            p.setString(1,bookname);
+            ResultSet rs = p.executeQuery();
+            rs.next();
+            String date=rs.getString("DATE");
+            System.out.println(date);
+            list.add(date);
 
+        } catch (Exception e) {
+            System.out.println("Error: " +e.getMessage());
+        }
+
+        return list;
+    }
 
 
             //login - registration etc...
@@ -390,51 +445,25 @@ public class MySQL {
         try {
             Class.forName(driver).newInstance();
             conn = DriverManager.getConnection(url, this.username, this.password);
-            String query = "INSERT INTO users(name, surename, username, password) "+
-                    " VALUES (?,?,?,?)";
+            String query = "INSERT INTO users(name, surename, username, password, phone, email, adress, town,postcode) "+
+                    " VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps= conn.prepareStatement(query);
             ps.setString(1,registration.name);
             ps.setString(2,registration.surename);
             ps.setString(3,registration.username);
             ps.setString(4,registration.password);
+            ps.setString(5,registration.phone);
+            ps.setString(6,registration.email);
+            ps.setString(7,registration.adress);
+            ps.setString(8,registration.city);
+            ps.setString(9,registration.postcode);
             ps.executeUpdate();
-            query = "INSERT INTO users_details(phone, email, adress, city,postcode) "+
-                    " VALUES (?,?,?,?,?)";
-            PreparedStatement ps1= conn.prepareStatement(query);
-            ps1.setString(1,registration.phone);
-            ps1.setString(2,registration.email);
-            ps1.setString(3,registration.adress);
-            ps1.setString(4,registration.city);
-            ps1.setString(4,registration.postcode);
-
-            ps1.executeUpdate();
-
-
+            System.out.println("1");
 
         }catch(Exception e){
             e.printStackTrace();
         }
     }
-    public List<String> getTime(String bookname){
-        List<String> list = new ArrayList<>();
-        try {
-            Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url, username, password);
-            String query = "select DATE_ADD(date, INTERVAL 90 DAY) DATE from record INNER JOIN books ON record.idb = books.id where name like ?";
-            PreparedStatement p = conn.prepareStatement(query);
-            p.setString(1,bookname);
-            ResultSet rs = p.executeQuery();
-            rs.next();
-            String date=rs.getString("DATE");
-            date = date + 3;
-            System.out.println(date);
-            list.add(date);
 
-        } catch (Exception e) {
-            System.out.println("Error: " +e.getMessage());
-        }
-
-        return list;
-    }
 
 }

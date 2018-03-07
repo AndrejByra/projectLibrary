@@ -149,7 +149,26 @@ public class Book {
 
         return Response.status(200).build();
     }
+    @GET
+    @Path("/borrowedby/{user}")     //input username output all borrowed book
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBorrowedby(@PathParam("user") String user) {
 
+        List<String>list= new MySQL().getBorrowedby(user);
+        System.out.println("list"+list);
+        boolean b= false;
+        String result= "getInfo({\"all\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }else
+                b=true;
+            result +="\""+temp+"\"";
+        }
+        result+="]})";
+
+        return Response.ok(result).build();
+    }
     @GET
     @Path("/borrowed")       //show all borrowed books
     @Produces(MediaType.APPLICATION_JSON)
@@ -170,6 +189,7 @@ public class Book {
         result+="]})";
         return Response.status(200).build();
     }
+
     @GET
     @Path("/free")       //show all free books to borrow
     @Produces(MediaType.APPLICATION_JSON)
