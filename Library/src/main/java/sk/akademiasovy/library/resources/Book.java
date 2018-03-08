@@ -3,6 +3,7 @@ package sk.akademiasovy.library.resources;
 import sk.akademiasovy.library.Author;
 import sk.akademiasovy.library.BookName;
 import sk.akademiasovy.library.Genre;
+import sk.akademiasovy.library.Lend;
 import sk.akademiasovy.library.db.MySQL;
 
 import javax.ws.rs.*;
@@ -232,5 +233,14 @@ public class Book {
         return result;
     }
 
+    @POST
+    @Path("/lendbook")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response checkCredentials(Lend lend){
+        System.out.println(lend.getIdb());
+        MySQL mySQL = new MySQL();
+        mySQL.getLendBook(lend.idb, lend.idu);
+        return null;
+    }
 
 }

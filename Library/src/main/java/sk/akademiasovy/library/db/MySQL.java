@@ -371,6 +371,21 @@ public class MySQL {
         return list;
     }
 
+    public void getLendBook (String idb, String idu){
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, this.username, this.password);
+
+            String query = "Insert into record (idu, idb) Values (?,?);";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1,idu);
+            ps.setString(2,idb);
+            System.out.println(ps);
+            ps.executeUpdate();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
             //login - registration etc...
     public User getUser(String username, String password){
