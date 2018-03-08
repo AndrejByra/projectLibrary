@@ -233,8 +233,30 @@ public class Book {
         return result;
     }
 
+    @GET
+    @Path("/lendedbook/{user}")     //input username output all lended book
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getlendedBook(@PathParam("user") String user){
+
+        List<String>list= new MySQL().getlendedBook(user);
+        System.out.println("list"+list);
+        boolean b= false;
+        String result= "Books({\"Books\":[";
+        for(String temp:list){
+            if(b==true){
+                result+=',';
+            }else
+                b=true;
+            result+="\""+temp+"\"";
+        }
+        result+="]})";
+
+        return result;
+    }
+
+
     @POST
-    @Path("/lendbook")
+    @Path("/lendbook")  // Post idu and idb to send to db record
     @Produces(MediaType.APPLICATION_JSON)
     public Response checkCredentials(Lend lend){
         System.out.println(lend.getIdb());

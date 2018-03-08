@@ -370,6 +370,27 @@ public class MySQL {
 
         return list;
     }
+    public List<String> getlendedBook(String user){
+        List<String> list = new ArrayList<>();
+        try {
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "select books.name AS name from record inner join users on record.idu = users.id INNER JOIN books on record.idb=books.id where users.name like ?;";
+            PreparedStatement p = conn.prepareStatement(query);
+            p.setString(1,user);
+            ResultSet rs = p.executeQuery();
+            rs.next();
+            while(rs.next()){
+                String name=rs.getString("name");
+                list.add(name);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error: " +e.getMessage());
+        }
+
+        return list;
+    }
 
     public void getLendBook (String idb, String idu){
         try {
