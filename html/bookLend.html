@@ -23,9 +23,9 @@
 
 			<div id="rightNav">
 				<a href="../index.html">Home</a>
-				<div class="dropdown">
+				<div class="dropdown" id="library">
 					<a class="dropbtn" href="#">Library</a>
-					<div class="dropdown-content">
+					<div class="dropdown-content contentLibrary">
 						<a id="all" href="#">All</a>
 						<a class="thisBook" id="drama" href="#">Drama</a>
 						<a class="thisBook" id="horror" href="#">Horror</a>
@@ -35,7 +35,12 @@
 					</div>
 				</div>
 
-				<a id="profile" href="#">Profile</a>
+				<div class="dropdown" id="logout">
+					<a class="dropbtn" id="profile" href="#">Profile</a>
+					<div class="dropdown-content contentLogout">
+						<a id="logoutBtn" href="#">Logout</a>
+					</div>
+				</div>
 			</div>
 
 		</div>
@@ -60,6 +65,7 @@
 	<script src="../script/jquery-3.3.1.js"></script>
 	<script src="../script/script.js"></script>
 	<script src="../script/requests.js"></script>	
+	<script src="../script/userInfo.js"></script>
 	
 </body>
 </html>

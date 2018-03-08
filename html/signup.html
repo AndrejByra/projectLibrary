@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Sign Up SOVY</title>
 	<link rel="stylesheet" href="../style/log.css">
+	<link rel="stylesheet" type="text/css" href="../style/mediaQueries.css">
 </head>
 <body>
 
@@ -40,7 +41,7 @@
 		
 
 			<div class="text">
-				<input id="phoneNumber" type="text" name="phoneNumber" placeholder="e.g. 0900 123 456">
+				<input id="phoneNumber" type="text" name="phoneNumber" placeholder="e.g. 0900123456">
 				<div class="phoneNumberErr error"></div>
 			</div>
 				
@@ -68,7 +69,17 @@
 
 	</div>
 
+	<div id="overlay">
+		<div id="success">
+			<div id="registration">You have successfully registered!</div>
+			<div id="continue">You can log in to SOVY Library.</div>
+			<div class="succesBtn"><button><a href="login.html">Log In</a></button></div>
+				
+		</div>
+	</div>
+
 	<script src="../script/jquery-3.2.1.min.js"></script>
-	<script src="../script/script.js"></script>	
+	<script src="../script/script.js"></script>
+	<script src="../script/log.js"></script>	
 </body>
 </html>

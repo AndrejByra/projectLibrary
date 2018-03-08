@@ -104,6 +104,19 @@ body {
     top: 70px;
 }
 
+.contentLogout {
+	right: 0;
+	width: 100%;
+	position: absolute;
+}
+.contentLibrary {
+	right: -3px;
+}
+
+.contentLogout #logoutBtn {
+	text-align: center;
+}
+
 #rightNav a:first-child {
 	padding: 0;
 }

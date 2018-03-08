@@ -1,0 +1,44 @@
+@media only screen and (max-width: 1100px) {
+
+}
+
+@media only screen and (max-width: 950px) {
+
+}
+
+@media only screen and (max-width: 768px) {
+
+}
+
+@media only screen and (max-width: 520px) {
+	#logInBox {
+		max-width: 100%;
+	}
+
+	#signUp {
+		width: 100%;
+		padding: 15px 0 45px;
+	}
+
+	#signUp #logoLibrary {
+    	max-width: 60%;
+	}
+
+	.about input {
+	    width: calc(29% - 12.5px);
+    	width: 70%;
+	}
+
+	.text input {
+		width: 70%;
+	}
+
+	#signUp .line {
+	    margin: 15px auto 10px;
+	    width: calc(70% + 20px);
+	}
+
+	#button button {
+	    width: calc(70% + 20px);
+	}
+}

@@ -18,6 +18,7 @@ body {
 	background-color: #fff;
 }
 
+/*HOME*/
 #home {
 	background: url(../img/bookBg.png) no-repeat center center fixed;
     background-size: cover;
@@ -31,44 +32,6 @@ body {
 	position: absolute;
 	top: 0; left: 0; right: 0; bottom: 0;
 	margin: auto;
-}
-
-#quote {
-	width: 100%;
-	padding: 75px 0;
-	font-family: Roboto Condensed Regular, sans-serif;
-	position: relative;
-	background-color: #F0F0F0;
-	box-shadow: 0 0 14px #8E8E8E;
-	z-index: 10;
-}
-
-#quoteBlock {
-	max-width: 24%;
-	margin: auto;
-}
-
-#quote p {
-	padding: 0; margin: 0;
-	text-align: left;	
-	font-size: 21px;
-	padding-bottom: 15px;
-	line-height: 23px;
-	font-weight: lighter;
-	letter-spacing: -0.1px;
-	border-bottom: 1.5px solid #2B2B2B;
-	color: #2B2B2B;
-	display: inline-block;
-	font-family: Roboto Condensed Light, sans-serif;
-}
-
-#quote span {
-	display: block;
-	padding-top: 15px;
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 18px;
-	text-align: right;
 }
 
 #indexNav {
@@ -154,20 +117,21 @@ body {
 	padding-bottom: 10px;
 	text-align: left;
 }
+
 #aboutText {
 	text-align: right;
 	padding-top: 10px;
 	max-width: 30%;
 	margin: auto;
 	font-size: 18px;
-	letter-spacing: .5px;
+	letter-spacing: .3px;
 }
 
 #indexBooks {
 	position: relative;
 	max-width: 65%;
 	margin: auto;
-	padding-top: 50px;
+	padding-top: 35px;
 }
 
 #indexBooks .book {
@@ -187,30 +151,31 @@ body {
 
 #muchMore {
 	margin-top: 50px;
-	padding: 20px 0;
+	padding: 35px 0 0;
 	max-width: calc(65% - 14px);
 	margin: auto;
 	text-align: center;
 }
 
-#muchMore span {
+#muchMore div {
 	display: block;
 	font-size: 19px;
 	letter-spacing: 1px;
 	color: #2B2B2B;
-	height: 30px;
 }
-#muchMore span:first-child {
+#muchMore div:first-child {
 	font-weight: bold;
 	text-transform: uppercase;
 	letter-spacing: 6px;
-	font-size: 22px;
+	font-size: 28px;
 }
-
+#muchMore div:nth-child(2) {
+	font-size: 22px;
+	padding-top: 10px;
+}
 #muchMore button {
 	border: 0;
 	background-color: #993636;
-	color: #fff;
 	font-family: Roboto Condensed Regular, sans-serif;
 	height: 45px;
 	font-size: 20px;
@@ -219,10 +184,60 @@ body {
 	border-radius: 5px;
 	margin-top: 15px;
 	padding: 0 30px;
+	transition: all .3s ease-in-out;
 }
 
+#muchMore button a {
+	text-decoration: none;
+	color: #fff;
+}
+#muchMore button:hover {
+	border-radius: 5px;
+	background-color: #791919;
+}
+
+/*QUOTE*/
+#quote {
+	width: 100%;
+	padding: 10% 0;
+	font-family: Roboto Condensed Regular, sans-serif;
+	position: relative;
+	background-color: #F0F0F0;
+	box-shadow: 0 1px 10px #8E8E8E;
+	z-index: 10;
+}
+
+#quoteBlock {
+	max-width: 24%;
+	margin: auto;
+}
+
+#quote p {
+	padding: 0; margin: 0;
+	text-align: left;	
+	font-size: 21px;
+	padding-bottom: 15px;
+	line-height: 23px;
+	font-weight: lighter;
+	letter-spacing: -0.1px;
+	border-bottom: 1.5px solid #2B2B2B;
+	color: #2B2B2B;
+	display: inline-block;
+	font-family: Roboto Condensed Light, sans-serif;
+}
+
+#quote span {
+	display: block;
+	padding-top: 15px;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 18px;
+	text-align: right;
+}
+
+/*CONTACT*/
 #contact {
-	height: calc(530px);
+	height: calc(550px);
 }
 
 #map {
@@ -231,6 +246,18 @@ body {
     display: inline-block;
     position: relative;
     float: right;
+}
+
+#triangle-topleft {
+	width: 0;
+    height: 0;
+    border-top: 550px solid #fff;
+    border-right: 150px solid transparent;
+    display: inline-block;
+    z-index: 9;
+    position: absolute;
+    left: 45%;
+    right: 0;
 }
 
 #whereToFindUs {
@@ -243,19 +270,32 @@ body {
 }
 
 #contactWrapper {
-    width: 65%;
+    width: 70%;
     border-radius: 5px;
     position: relative;
     background-color: rgba(255,255,255,1);
-    margin: 20% auto 0;
+    margin: 23% auto 0;
     left: 10%;
+}
+
+#contactWrapper .address {
+    padding-top: 30px;
+    display: inline-block;
+}
+
+.brdbtm {
+	border-bottom: 1.5px solid #2B2B2B;	
+	display: inline-block;
+	padding-bottom: 17px;
 }
 
 .whereToFindUsHeader {
 	font-size: 50px;
 	letter-spacing: .5px;
 	font-weight: bold;
-
+	border-bottom: 1.5px solid #2B2B2B;
+	color: #2B2B2B;
+	padding-bottom: 10px;
 }
 
 #whereToFindUs .contactDetails {
@@ -263,26 +303,47 @@ body {
 	letter-spacing: 3px;
 	font-weight: bold;
 }
+
 #whereToFindUs .lHead {
-	font-size: 20px;
-	letter-spacing: .5px;
+	font-size: 21px;
+	letter-spacing: .75px;
 	font-weight: bold;
 	color: #8E8E8E;
-	margin-top: 7px;
+	margin-top: 3px;
 }
 #whereToFindUs .lText {
 	font-size: 18px;
 	letter-spacing: .3px;
+	color: #2B2B2B;
 }
 
-#triangle-topleft {
-	width: 0;
-    height: 0;
-    border-top: 530px solid #fff;
-    border-right: 150px solid transparent;
-    display: inline-block;
-    z-index: 9;
-    position: absolute;
-    left: 45%;
-    right: 0;
+#social {
+	padding-top: 17px;
 }
+#whereToFindUs #social img {
+	width: 30px;
+	transition: all .3s ease-in-out;
+	cursor: pointer;
+}
+.fb {
+	padding: 0 5px;
+}
+#whereToFindUs 	#social img:hover {
+	transform: scale(1.1);
+}
+
+/*FOOTER*/
+footer {
+	background-color: #F0F0F0;
+    box-shadow: 0 -1px 10px #8E8E8E;
+	z-index: 20;
+	position: relative;
+	padding: 30px 0;
+}
+
+footer .footer {
+	font-size: 13px;
+	letter-spacing: 1px;
+	text-align: center;
+}
+
