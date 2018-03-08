@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- <script src="https://use.fontawesome.com/69e9bead1c.js"></script> -->
 	<link rel="stylesheet" href="style/style.css">
+	<link rel="stylesheet" type="text/css" href="style/mediaQueries.css">
 
 </head>
 <body>
@@ -18,6 +19,7 @@
 			<div id="navLogo" ><img src="img/libraryLogo.png" alt=""></div>
 
 			<div id="indexNav" class="indexNav">
+				<img src="img/menu.png" alt="">
 
 				<div id="leftNav">
 					<a href="#home" title="">home</a>
@@ -32,7 +34,6 @@
 			</div>
 	
 			<img id="libraryLogo" src="img/libraryLogo.png" alt="">
-
 		</div>
 
 		<div id="about">
@@ -44,9 +45,9 @@
 			<div id="indexBooks"></div>
 
 			<div id="muchMore">
-				<span>Still Not a Member?</span>
-				<span>Sign Up To See More!</span>
-				<button>Sign Up</button>
+				<div>Still Not a Member?</div>
+				<div>Sign Up To See More!</div>
+				<button><a href="html/signup.html">Sign Up</a></button>
 			</div>
 		</div>
 
@@ -61,113 +62,47 @@
 			<div id="triangle-topleft"></div>
 			<div id="whereToFindUs">
 				<div id="contactWrapper">
-					<div class="whereToFindUsHeader">Where To Find Us?</div>
+					<span class="whereToFindUsHeader">Where To Find Us?</span>
 					<div class="address">
-						<div class="contactDetails">Contact</div>
-						<div class="lHead">Name:</div>
-						<div class="libraryName lText">SOVY library</div>
-						<div class="lHead">Address:</div>
-						<div class="addressLine lText">Dneperská 1</div>
-						<div class="city lText">040 12 Košice</div>
-						<div class="lHead">Telephone number:</div>
-						<div class="number lText">+421 55 674 48 38</div>
+						<span class="lHead">Telephone number:</span>
+						<span class="number lText">&nbsp+421 55 674 48 38</span><br>
+						<span class="lHead">Address:</span>
+						<span class="addressLine lText">&nbsp Dneperská 1, 040 12 Košice</span><br>
+						<span class="lHead">E-mail:</span>
+						<span class="emailName lText">&nbsp asksovy@sovylibrary.com</span><br>	
+						<div class="brdbtm">	
+							<span class="lHead">Name:</span>
+							<span class="libraryName lText">&nbsp SOVY library</span>
+						</div>
+					</div>
+					<div id="social">
+						<a target="_blank" href="https://www.linkedin.com"><img src="img/social/002-linkedin-logo.png" alt=""></a>
+						<a target="_blank" href="https://www.facebook.com" class="fb"><img src="img/social/003-facebook.png" alt=""></a>
+						<a target="_blank" href="https://www.instagram.com"><img src="img/social/005-instagram-big-logo.png" alt=""></a>
 					</div>
 				</div>
 			</div>
 		    <div id="map"></div>
 		</div>
+
+		<footer>
+			<div class="footer">ALL RIGHTS RESERVED&nbsp • &nbspALL LOGOS & TRADEMARK BELONGS TO THEIR RESPECTIVE OWNERS&nbsp • &nbsp© COPYRIGHT 2O18 SOVY LIBRARY</div>
+		</footer>
 	</div>
 
 	<script src="script/jquery-3.2.1.min.js"></script>
 	<script src="script/script.js"></script>
 	<script src="script/requests.js"></script>
+	<!-- <script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js"
+	  integrity="sha256-H28SdxWrZ387Ldn0qogCzFiUDDxfPiNIyJX7BECQkDE="
+	  crossorigin="anonymous"></script> -->
 
 	<script>
       function initMap() {
-        var uluru = {lat: 48.6878705, lng: 21.28512};
+        var uluru = {lat: 48.687913, lng: 21.287305};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 8,
-          center: uluru,
-          // styles: [
-          //   {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-          //   {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-          //   {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-          //   {
-          //     featureType: 'administrative.locality',
-          //     elementType: 'labels.text.fill',
-          //     stylers: [{color: '#d59563'}]
-          //   },
-          //   {
-          //     featureType: 'poi',
-          //     elementType: 'labels.text.fill',
-          //     stylers: [{color: '#d59563'}]
-          //   },
-          //   {
-          //     featureType: 'poi.park',
-          //     elementType: 'geometry',
-          //     stylers: [{color: '#263c3f'}]
-          //   },
-          //   {
-          //     featureType: 'poi.park',
-          //     elementType: 'labels.text.fill',
-          //     stylers: [{color: '#6b9a76'}]
-          //   },
-          //   {
-          //     featureType: 'road',
-          //     elementType: 'geometry',
-          //     stylers: [{color: '#38414e'}]
-          //   },
-          //   {
-          //     featureType: 'road',
-          //     elementType: 'geometry.stroke',
-          //     stylers: [{color: '#212a37'}]
-          //   },
-          //   {
-          //     featureType: 'road',
-          //     elementType: 'labels.text.fill',
-          //     stylers: [{color: '#9ca5b3'}]
-          //   },
-          //   {
-          //     featureType: 'road.highway',
-          //     elementType: 'geometry',
-          //     stylers: [{color: '#746855'}]
-          //   },
-          //   {
-          //     featureType: 'road.highway',
-          //     elementType: 'geometry.stroke',
-          //     stylers: [{color: '#1f2835'}]
-          //   },
-          //   {
-          //     featureType: 'road.highway',
-          //     elementType: 'labels.text.fill',
-          //     stylers: [{color: '#f3d19c'}]
-          //   },
-          //   {
-          //     featureType: 'transit',
-          //     elementType: 'geometry',
-          //     stylers: [{color: '#2f3948'}]
-          //   },
-          //   {
-          //     featureType: 'transit.station',
-          //     elementType: 'labels.text.fill',
-          //     stylers: [{color: '#d59563'}]
-          //   },
-          //   {
-          //     featureType: 'water',
-          //     elementType: 'geometry',
-          //     stylers: [{color: '#17263c'}]
-          //   },
-          //   {
-          //     featureType: 'water',
-          //     elementType: 'labels.text.fill',
-          //     stylers: [{color: '#515c6d'}]
-          //   },
-          //   {
-          //     featureType: 'water',
-          //     elementType: 'labels.text.stroke',
-          //     stylers: [{color: '#17263c'}]
-          //   }
-          // ]
+          zoom: 10,
+          center: uluru
         });
         var marker = new google.maps.Marker({
           position: uluru,

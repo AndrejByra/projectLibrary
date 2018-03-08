@@ -299,7 +299,7 @@ span.bookName {
 #notAvailable {
 	width: 100%;
 	background-color: #FF0E0E;
-	color: #232323;
+	color: #fff;
 	letter-spacing: .5px;
 	font-size: 17px;
 	font-weight: bold;

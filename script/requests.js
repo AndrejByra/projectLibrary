@@ -1,5 +1,34 @@
 (function($){
 
+	var countDownDate = new Date("2018-06-06 16:26:38.0").getTime();
+
+		var x = setInterval(function() {
+		    var now = new Date().getTime();
+		    var distance = countDownDate - now;
+			    
+		    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+			
+		    $("#demo").text("Available in " + days + " days " + hours + "h "
+		    + minutes + "m " + seconds + "s ");
+
+		    if (distance < 0) {
+     		    clearInterval(x);
+        		$("#demo").text("EXPIRED");
+    		}
+		
+		}, 1000);
+
+	$("#logoutBtn").click(function(){
+		var user = { 'login': '',
+	        	     'name': '' };
+	    window.location.href = "../index.html";
+		localStorage.setItem('user', JSON.stringify(user));
+	});
+	
+
 	// BOOK LENDING
 	$("#bookWrapper").hide();
 	$("#books").hide();
@@ -18,7 +47,7 @@
 			url: 'http://localhost:8080/book/allbook',
 			data: { },
 			error: function(){
-				alert("Error");
+				alert("Error all book");
 			},
 			success: getBooks,
 			crossDomain: true,
@@ -56,7 +85,7 @@
 		url: 'http://localhost:8080/book/genre/' +bookId,
 		data: { },
 		error: function(){
-			alert("Error");
+			alert("Error genre");
 		},
 		success: getGenres,
 		crossDomain: true,
@@ -91,7 +120,7 @@
 			url: 'http://localhost:8080/book/info/' +bookName,
 			data: { },
 			error: function(){
-				alert("Error");
+				alert("Error book info");
 			},
 			success: getInfo,
 			crossDomain: true,
@@ -102,22 +131,23 @@
 		});
 
 		function getInfo(data){
-			console.log(data.all[6]);
+
+			// Set the date we're counting down to
+			
 			var status = "";
 
 			if(data.all[6] == 0)
 				status = "<div id='available'>Available</div><div id='borrow'><button>Borrow</button></div>";
 			else 
 				status = "<div id='notAvailable'>Not available</div>";
-			console.log(status);
 
 			$("#bookWrapper").append("<div id='cover'><img src='../img/books/"+data.all[0]+".jpg'></div>");
 			$("#bookWrapper").append("<div id='aboutBook'>"+
-				"<div id='nameofbook'>"+data.all[1]+"</div>"+
-				"<div id='author'>Author: "+data.all[2]+"</div>"+
-				"<div id='isbn'><span>ISBN: </span>"+data.all[3]+"</div>"+
-				"<div id='genre'><span>Genre: </span>"+data.all[4]+"</div>"+
-				"<div id='detailofbook'>"+data.all[5]+"</div>"+
+				"<div id='nameofbook'>"+data.all[0]+"</div>"+
+				"<div id='author'>Author: "+data.all[1]+"</div>"+
+				"<div id='isbn'><span>ISBN: </span>"+data.all[2]+"</div>"+
+				"<div id='genre'><span>Genre: </span>"+data.all[3]+"</div>"+
+				"<div id='detailofbook'>"+data.all[4]+"</div>"+
 				status+"</div>");
 		}
 	
@@ -129,7 +159,7 @@
 		url: 'http://localhost:8080/book/allbook',
 		data: { },
 		error: function(){
-			alert("Error");
+			alert("Error all book index");
 		},
 		success: getBooks,
 		crossDomain: true,
@@ -146,79 +176,43 @@
 		}
 	}
 
-	// USER INFO
-	$.ajax({
-		url: 'http://localhost:8080/book/userinfo/domingo123',
-		data: { },
-		error: function(){
-			alert("Error");
-		},
-		success: getInfo,
-		crossDomain: true,
-		dataType: 'jsonp',
-		jsonpCallback: 'getInfo',
-			contentType: 'application/json',
-			type: 'GET'
-	});
+	// var retrievedObject = JSON.parse(localStorage.getItem('user'));
 
-	function getInfo(data){
-		$("#aboutInfo").append("<div class='infoW'><div class='infoHeader'>First name:</div><span>"+data.all[0]+"</span></div>"+
-			"<div class='infoW'><div class='infoHeader'>Last name:</div><span>"+data.all[1]+"</span></div>"+
-			"<div class='infoW'><div class='infoHeader'>Login:</div><span>"+data.all[2]+"</span></div>"+
-			"<div class='infoW'><div class='infoHeader'>E-mail address:</div><span>"+data.all[3]+"</span></div>"+
-			"<div class='infoW'><div class='infoHeader'>Telephone number:</div><span>"+data.all[4]+"</span></div>");
-		$("#address").append("<div class='infoW'><div class='infoHeader'>Address line:</div><span>"+data.all[5]+"</span></div>"+
-			"<div class='infoW'><div class='infoHeader'>Town / City</div><span>"+data.all[6]+"</span></div>"+
-			"<div class='infoW'><div class='infoHeader'>Postcode</div><span>"+data.all[7]+"</span></div>");
-		$("#nav").css({	"border-bottom" : "7px solid #e5e5e5" });
-	}
+	// USER INFO
+	// $.ajax({
+	// 	url: 'http://localhost:8080/book/userinfo/'+retrievedObject.login,
+	// 	data: { },
+	// 	error: function(){
+	// 		alert("Error user info");
+	// 	},
+	// 	success: getInfo,
+	// 	crossDomain: true,
+	// 	dataType: 'jsonp',
+	// 	jsonpCallback: 'getInfo',
+	// 		contentType: 'application/json',
+	// 		type: 'GET'
+	// });
+
+	// function getInfo(data){
+	// 	$("#profile").text("Hello " +retrievedObject.name);
+	// 	$("#aboutInfo").append("<div class='infoW'><div class='infoHeader'>First name:</div><span>"+data.all[0]+"</span></div>"+
+	// 		"<div class='infoW'><div class='infoHeader'>Last name:</div><span>"+data.all[1]+"</span></div>"+
+	// 		"<div class='infoW'><div class='infoHeader'>Login:</div><span>"+data.all[2]+"</span></div>"+
+	// 		"<div class='infoW'><div class='infoHeader'>E-mail address:</div><span>"+data.all[3]+"</span></div>"+
+	// 		"<div class='infoW'><div class='infoHeader'>Telephone number:</div><span>"+data.all[4]+"</span></div>");
+	// 	$("#address").append("<div class='infoW'><div class='infoHeader'>Address line:</div><span>"+data.all[5]+"</span></div>"+
+	// 		"<div class='infoW'><div class='infoHeader'>Town / City</div><span>"+data.all[6]+"</span></div>"+
+	// 		"<div class='infoW'><div class='infoHeader'>Postcode</div><span>"+data.all[7]+"</span></div>");
+	// 	$("#nav").css({	"border-bottom" : "7px solid #e5e5e5" });
+	// }
 
 	$("#profile").click(function(){
-		$("#books").fadeOut(500);
-		$("#bookWrapper").fadeOut(500);
-		$("#infoWrapper").delay(1000).fadeIn(500);
+		$("#books").hide();
+		$("#bookWrapper").hide();
+		$("#infoWrapper").delay(500).fadeIn(100);
 		$("#nav").css({	"border-bottom" : "7px solid #e5e5e5" });
-		$("#userImg").delay(1000).fadeIn(500);
+		$("#userImg").delay(500).fadeIn(200);
 	});
 
 
 })(jQuery);
-		// $.ajax({
-		//     type: 'GET',
-		//     url: 'localhost:8080/book/author/' +bookName,
-		//     success: function(data) {
-		//     	console.log(data);
-		//     	$("#aboutBook").prepend("<div id='author'>Author: "+data.name+"</div>");
-		//     },
-		//     error: function(event) {
-		//         console.log(event.statusText);
-		//     },
-		//     jsonp: 'jsonp'
-
-		// });
-
-	// var book = {
-	// 	genre: bookId
-	// };
-
-	// var jsonBook = JSON.stringify(book);
-
-	// $.ajax({
-	// url: "http://localhost:8080/book/genres",
-	// type: "POST",
-	// processData: false,
-	// data: jsonBook,
-	// success: getGenre,
-
-	// error: function(){
-	// 	alert("Error genre.");
-	// },
-	// dataType: 'json',
-	// contentType: 'application/json',
-	// complete: getGenre
-	// });
-
-	// function getGenre(data){
-	// 	console.log(data);
-	// }
-	

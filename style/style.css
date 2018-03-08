@@ -43,6 +43,10 @@ body {
 	z-index: 100000;
 }
 
+#indexNav img {
+	display: none;
+}
+
 #indexNav a {
 	text-decoration: none;
 	color: #fff;
