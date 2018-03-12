@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, 	initial-scale=1">
 	<link rel="stylesheet" href="../style/book.css">
 	<link rel="stylesheet" href="../style/userInfoStyle.css">
+	<link rel="stylesheet" type="text/css" href="../style/mediaQueriesBook.css">
 
 </head>
 <body>
@@ -15,8 +16,26 @@
 
 		<img id="userImg" src="../img/round-account-button-with-user-inside.png" alt="">
 		
+		<div id="smallDropDown">
+			<div class="menuBtn">
+				<img src="../img/menu.png" alt="">
+			</div>
+			<div id="smallDropDownContent">
+				<a href="../index.html">Home</a>
+				<a id="libraryDropDownBtn" href="#">Library</a>
+				<div id="libraryDropDownContent">
+					<a class="thisBook" id="drama" href="#">Drama</a>
+					<a class="thisBook" id="horror" href="#">Horror</a>
+					<a class="thisBook" id="comedy" href="#">Comedy</a>
+					<a class="thisBook" id="fantasy" href="#">Fantasy</a>
+					<a class="thisBook" id="adventure" href="#">Adventure</a>
+				</div>
+				<a href="#" id="profile">Profile</a>
+				<a class="logoutBtn" href="#">Logout</a>
+			</div>
+		</div>
+
 		<div id="nav">
-			
 			<div id="leftNav">
 				<a href="../index.html"><img src="../img/libraryLogo.png"></a>
 			</div>
@@ -57,6 +76,9 @@
 			</div>
 			<div id="address">
 				<div class="aboutHeader">Address</div>
+			</div>
+			<div id="loanedBook">
+				<div class="aboutHeader">Loaned Book</div>
 			</div>
 		</div>
 

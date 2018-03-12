@@ -1,31 +1,25 @@
 (function($){
 
-	var countDownDate = new Date("2018-06-06 16:26:38.0").getTime();
-
-		var x = setInterval(function() {
-		    var now = new Date().getTime();
-		    var distance = countDownDate - now;
-			    
-		    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-		    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-		    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-			
-		    $("#demo").text("Available in " + days + " days " + hours + "h "
-		    + minutes + "m " + seconds + "s ");
-
-		    if (distance < 0) {
-     		    clearInterval(x);
-        		$("#demo").text("EXPIRED");
-    		}
-		
-		}, 1000);
-
-	$("#logoutBtn").click(function(){
+	$("#logoutBtn, .logoutBtn").click(function(){
+		var retrievedObject = JSON.parse(localStorage.getItem('user'));
 		var user = { 'login': '',
-	        	     'name': '' };
+	        	     'name': '',
+	        	     'token': '' };
 	    window.location.href = "../index.html";
 		localStorage.setItem('user', JSON.stringify(user));
+		
+		$.ajax({
+			url: 'http://localhost:8080/login/logout/' +retrievedObject.token,
+			data: { },
+			error: function(){
+				alert("Error logout");
+			    window.location.href = "../index.html";
+			},
+			crossDomain: true,
+			dataType: 'jsonp',
+			contentType: 'application/json',
+			type: 'GET'
+		});
 	});
 	
 
@@ -114,7 +108,7 @@
 		$("#bookWrapper").empty();
 		var bookName = ($(this).prev().text());
 		$("#books").fadeOut(500);
-
+		console.log(bookName);
 
 		$.ajax({
 			url: 'http://localhost:8080/book/info/' +bookName,
@@ -132,23 +126,62 @@
 
 		function getInfo(data){
 
-			// Set the date we're counting down to
-			
+			console.log((data.all[0]).trim());
 			var status = "";
 
-			if(data.all[6] == 0)
+			if(data.all[5] == 0)
 				status = "<div id='available'>Available</div><div id='borrow'><button>Borrow</button></div>";
 			else 
-				status = "<div id='notAvailable'>Not available</div>";
+				status = "<div id='notAvailable' class=''>Not available</div>";
 
 			$("#bookWrapper").append("<div id='cover'><img src='../img/books/"+data.all[0]+".jpg'></div>");
-			$("#bookWrapper").append("<div id='aboutBook'>"+
+			$("#bookWrapper").append("<div id='aboutBook' class=''>"+
 				"<div id='nameofbook'>"+data.all[0]+"</div>"+
 				"<div id='author'>Author: "+data.all[1]+"</div>"+
 				"<div id='isbn'><span>ISBN: </span>"+data.all[2]+"</div>"+
 				"<div id='genre'><span>Genre: </span>"+data.all[3]+"</div>"+
 				"<div id='detailofbook'>"+data.all[4]+"</div>"+
 				status+"</div>");
+		}
+
+		$.ajax({
+			url: 'http://localhost:8080/book/time/' +bookName,
+			data: { },
+			error: function(){
+				alert("Error time");
+			},
+			success: getDate,
+			crossDomain: true,
+			dataType: 'jsonp',
+			jsonpCallback: 'getDate',
+				contentType: 'application/json',
+				type: 'GET'
+		});
+
+		function getDate(data){
+			$("#bookWrapper").find("#notAvailable").empty();
+
+			var countDownDate = new Date(data.date[0]).getTime();
+
+			var x = setInterval(function() {
+			    var now = new Date().getTime();
+			    var distance = countDownDate - now;
+				    
+			    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+				
+			    $("#bookWrapper").find("#notAvailable").text("Available in " + days + " days");
+
+			    if (distance < 0) {
+		 		    clearInterval(x);
+		    		$("#demo").text("EXPIRED");
+				}
+			
+			}, 1000);
+
+			console.log(data.date[0]);
 		}
 	
 		$("#bookWrapper").delay(1000).fadeIn(500);
@@ -176,43 +209,21 @@
 		}
 	}
 
-	// var retrievedObject = JSON.parse(localStorage.getItem('user'));
-
-	// USER INFO
-	// $.ajax({
-	// 	url: 'http://localhost:8080/book/userinfo/'+retrievedObject.login,
-	// 	data: { },
-	// 	error: function(){
-	// 		alert("Error user info");
-	// 	},
-	// 	success: getInfo,
-	// 	crossDomain: true,
-	// 	dataType: 'jsonp',
-	// 	jsonpCallback: 'getInfo',
-	// 		contentType: 'application/json',
-	// 		type: 'GET'
-	// });
-
-	// function getInfo(data){
-	// 	$("#profile").text("Hello " +retrievedObject.name);
-	// 	$("#aboutInfo").append("<div class='infoW'><div class='infoHeader'>First name:</div><span>"+data.all[0]+"</span></div>"+
-	// 		"<div class='infoW'><div class='infoHeader'>Last name:</div><span>"+data.all[1]+"</span></div>"+
-	// 		"<div class='infoW'><div class='infoHeader'>Login:</div><span>"+data.all[2]+"</span></div>"+
-	// 		"<div class='infoW'><div class='infoHeader'>E-mail address:</div><span>"+data.all[3]+"</span></div>"+
-	// 		"<div class='infoW'><div class='infoHeader'>Telephone number:</div><span>"+data.all[4]+"</span></div>");
-	// 	$("#address").append("<div class='infoW'><div class='infoHeader'>Address line:</div><span>"+data.all[5]+"</span></div>"+
-	// 		"<div class='infoW'><div class='infoHeader'>Town / City</div><span>"+data.all[6]+"</span></div>"+
-	// 		"<div class='infoW'><div class='infoHeader'>Postcode</div><span>"+data.all[7]+"</span></div>");
-	// 	$("#nav").css({	"border-bottom" : "7px solid #e5e5e5" });
-	// }
-
-	$("#profile").click(function(){
+	$("#nav #profile").click(function(){
 		$("#books").hide();
 		$("#bookWrapper").hide();
 		$("#infoWrapper").delay(500).fadeIn(100);
 		$("#nav").css({	"border-bottom" : "7px solid #e5e5e5" });
 		$("#userImg").delay(500).fadeIn(200);
 	});
+
+	$("#smallDropDown #profile").click(function(){
+		$("#books").hide();
+		$("#bookWrapper").hide();
+		$("#infoWrapper").delay(500).fadeIn(100);
+		$("#nav").css({	"border-bottom" : "7px solid #e5e5e5" });
+	});
+
 
 
 })(jQuery);

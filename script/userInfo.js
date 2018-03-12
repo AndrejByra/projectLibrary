@@ -7,7 +7,7 @@
 		url: 'http://localhost:8080/book/userinfo/'+retrievedObject.login,
 		data: { },
 		error: function(){
-			alert("Error user info");
+		    window.location.href = "../index.html";
 		},
 		success: getInfo,
 		crossDomain: true,
@@ -19,7 +19,8 @@
 
 	function getInfo(data){
 		console.log(data);
-		$("#profile").text("Hello " +retrievedObject.name);
+		$("#logout #profile").text("Hello " +retrievedObject.name);
+
 		$("#aboutInfo").append("<div class='infoW'><div class='infoHeader'>First name:</div><span>"+data.all[0]+"</span></div>"+
 			"<div class='infoW'><div class='infoHeader'>Last name:</div><span>"+data.all[1]+"</span></div>"+
 			"<div class='infoW'><div class='infoHeader'>Login:</div><span>"+data.all[2]+"</span></div>"+
@@ -29,6 +30,27 @@
 			"<div class='infoW'><div class='infoHeader'>Town / City</div><span>"+data.all[6]+"</span></div>"+
 			"<div class='infoW'><div class='infoHeader'>Postcode</div><span>"+data.all[7]+"</span></div>");
 		$("#nav").css({	"border-bottom" : "7px solid #e5e5e5" });
+	}
+
+	$.ajax({
+		url: 'http://localhost:8080/book/lendedbook/'+retrievedObject.login,
+		data: { },
+		error: function(){
+		    alert("Error loaned books")
+		},
+		success: Books,
+		crossDomain: true,
+		dataType: 'jsonp',
+		jsonpCallback: 'Books',
+			contentType: 'application/json',
+			type: 'GET'
+	});
+
+	function Books (data){
+		console.log(data.Books.length);
+		for (var i = 0; i < data.Books.length; i++) {
+			$("#loanedBook").append("<div class='infoW'><div class='infoHeader'>Name of book</div><span>"+data.Books[i]+"</span></div>");
+		}
 	}
 
 })(jQuery);

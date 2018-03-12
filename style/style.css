@@ -34,6 +34,40 @@ body {
 	margin: auto;
 }
 
+/*SMALL NAVBAR*/
+#indexDropDown {
+	position: fixed;
+	top: 0; left: 0; right: 0;
+	width: 100%;
+	height: 70px;
+	z-index: 100000;
+}
+
+#indexDropDownContent {
+	display: none;
+}
+
+.menuBtn img {
+	display: none;
+}
+
+#indexDropDownContent a {
+	color: #2B2B2B;
+	background-color: #e5e5e5;
+	text-transform: uppercase;
+	display: block;
+	text-decoration: none;
+	padding: 20px 10px;
+	font-weight: bold;
+}
+#indexDropDownContent a:nth-child(2n) {
+	background-color: #F2F2F2;
+} 
+
+.menuBtn {
+	height: 70px;
+}
+
 #indexNav {
 	position: fixed;
 	top: 0; left: 0; right: 0;
@@ -278,26 +312,26 @@ body {
     border-radius: 5px;
     position: relative;
     background-color: rgba(255,255,255,1);
-    margin: 23% auto 0;
+    margin: 20% auto 0;
     left: 10%;
 }
 
 #contactWrapper .address {
-    padding-top: 30px;
+    padding-top: 35px;
     display: inline-block;
 }
 
 .brdbtm {
-	border-bottom: 1.5px solid #2B2B2B;	
+	border-bottom: 10px solid #2B2B2B;	
 	display: inline-block;
-	padding-bottom: 17px;
+	padding-bottom: 15px;
 }
 
 .whereToFindUsHeader {
 	font-size: 50px;
 	letter-spacing: .5px;
 	font-weight: bold;
-	border-bottom: 1.5px solid #2B2B2B;
+	border-bottom: 10px solid #2B2B2B;
 	color: #2B2B2B;
 	padding-bottom: 10px;
 }
@@ -322,7 +356,7 @@ body {
 }
 
 #social {
-	padding-top: 17px;
+	padding-top: 20px;
 }
 #whereToFindUs #social img {
 	width: 30px;

@@ -1,0 +1,104 @@
+@media only screen and (max-width: 1200px) {
+	}
+
+@media only screen and (max-width: 1050px) {
+	#userImg {
+		display: none;
+	}
+
+	#infoWrapper {
+		max-width: 70%;
+	}
+
+	#rightNav a {
+		margin: 0 9px;
+	}
+	
+	span.bookName {
+		font-size: 17px;
+	    padding: 35% 15px 0;
+	}
+
+	.btnLend {
+	    margin-top: 10px;
+        font-size: 16px;
+	    padding: 3px 20px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+
+	#nav {
+		display: none;
+	}
+
+	#smallDropDown {
+		display: block;
+	}
+
+	#smallDropDownContent {
+		top: 70px;
+		z-index: 10000;
+		width: 100%;
+	}
+	
+	.menuBtn {
+		position: fixed;
+		top: 0; left: 0; right: 0;
+		z-index: 1000;
+		width: 100%;
+		height: 70px;
+		line-height: 70px;
+		background-color: #993636;
+		text-align: center;
+		display: block;
+	}
+
+	.menuBtn img {
+		width: 50px;
+		padding: 10px;
+		position: relative;
+		z-index: 10000;
+	}
+
+	
+	#leftNav,
+	#rightNav {
+		display: none;
+	}
+
+	#books .book {
+	    width: calc(33.333333333333333% - 14px);
+	}
+
+}
+
+@media only screen and (max-width: 520px) {
+		
+	#infoWrapper {
+		max-width: 95%;
+	}
+
+	#books {
+		max-width: 95%;
+		margin: 20px auto;
+	}
+
+	#books .book {
+	    width: calc(50% - 14px);
+	}
+	
+
+	#bookWrapper {
+	    max-width: 90%;
+		margin: 20px auto;
+	}
+
+	#cover {
+		width: 100%;
+	}
+
+	#aboutBook {
+	    width: calc(100% - 40px);
+	}
+}

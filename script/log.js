@@ -47,7 +47,8 @@
 		$.ajax(settings).done(function (data) {
 			if(error == false){
 			var user = { 'login': $("#enterLogin").val(),
-	        			  'name': data.name };
+	        			  'name': data.name,
+	        			  'token': data.token };
 			localStorage.setItem('user', JSON.stringify(user));
 			window.location.href = "../html/bookLend.html";
 			}
@@ -152,11 +153,14 @@
 			
 			if(error == false) 
 				$("#overlay").fadeIn(150);
-
+			
+		}).fail(function(data){
+			alert("Registation failed. Try again");
+			$("input").val("");
 		});
 
 	});
 
-
+	
 
 })(jQuery);

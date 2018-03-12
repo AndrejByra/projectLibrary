@@ -76,9 +76,8 @@
 
 @media only screen and (max-width: 768px) {
 	/*INDEX*/
-	#leftNav,
-	#rightNav {
-		display: none;
+	#indexNav {
+		display: none;	
 	}
 
 	#indexNav img {
@@ -162,6 +161,13 @@
 	footer {
 		padding: 30px 20px;
 	}
+
+	.menuBtn img {
+		width: 40px;
+		padding: 15px;
+		z-index: 10000;
+		display: inline-block;
+	}
 }
 
 @media only screen and (max-width: 600px) {
@@ -232,11 +238,11 @@
 	#contactWrapper {
 		left: 0;
 	    margin: 15% auto 0;
-	    width: 80%;
+	    width: 85%;
 	}
 
 	.whereToFindUsHeader {
-		font-size: 40px;
+		font-size: 35px;
 	}
 
 	#map {
