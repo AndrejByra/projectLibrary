@@ -179,7 +179,7 @@ public class MySQL {
             String genre = rs.getString("genre");
             list.add(genre);
 
-            query = "SELECT detailsOfBook FROM  books_details INNER JOIN books ON books_details.books = books.name LIKE ?";
+            query = "SELECT detailsOfBook FROM  books_details INNER JOIN books ON books.id = books_details.id where  name LIKE ?";
             p = conn.prepareStatement(query);
             p.setString(1,bookname);
             rs = p.executeQuery();
