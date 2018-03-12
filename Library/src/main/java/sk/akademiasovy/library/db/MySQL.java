@@ -233,7 +233,7 @@ public class MySQL {
             String username = rs.getString("username");
             list.add(username);
 
-            query = "select email from users_details INNER JOIN users ON users_details.IDuser = users.id where username like ?";
+            query = "select email from users where username like ?";
             p = conn.prepareStatement(query);
             p.setString(1,user);
             rs = p.executeQuery();
@@ -241,7 +241,7 @@ public class MySQL {
             String email = rs.getString("email");
             list.add(email);
 
-            query = "select phone from users_details INNER JOIN users ON users_details.IDuser = users.id where username like ?;";
+            query = "select phone from users where username like ?";
             p = conn.prepareStatement(query);
             p.setString(1,user);
             rs = p.executeQuery();
@@ -249,7 +249,7 @@ public class MySQL {
             String phone = rs.getString("phone");
             list.add(phone);
 
-            query = "select adress from users_details INNER JOIN users ON users_details.IDuser = users.id where username like ?";
+            query = "select adress from users where username like ?";
             p = conn.prepareStatement(query);
             p.setString(1,user);
             rs = p.executeQuery();
@@ -257,7 +257,7 @@ public class MySQL {
             String adress = rs.getString("adress");
             list.add(adress);
 
-            query = "select town from users_details INNER JOIN users ON users_details.IDuser = users.id where username like ?";
+            query = "select town from users where username like ?";
             p = conn.prepareStatement(query);
             p.setString(1,user);
             rs = p.executeQuery();
@@ -265,7 +265,7 @@ public class MySQL {
             String town = rs.getString("town");
             list.add(town);
 
-            query = "select postcode from users_details INNER JOIN users ON users_details.IDuser = users.id where username like ?";
+            query = "select postcode from users where username like ?";
             p = conn.prepareStatement(query);
             p.setString(1,user);
             rs = p.executeQuery();
@@ -403,6 +403,13 @@ public class MySQL {
             ps.setString(2,idb);
             System.out.println(ps);
             ps.executeUpdate();
+
+            query = "UPDATE books SET status = TRUE WHERE id LIKE ?;";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, idb);
+            System.out.println(ps);
+            ps.executeUpdate();
+
         }catch(Exception e){
             e.printStackTrace();
         }

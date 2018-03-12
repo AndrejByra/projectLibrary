@@ -32,7 +32,7 @@ public class Book {
         }
 
         result+="]})";
-        return Response.status(200).build();
+        return Response.ok(result).build();
     }
     @GET
     @Path("/allauthor")       //show all books
@@ -52,7 +52,7 @@ public class Book {
         }
 
         result+="]})";
-        return Response.status(200).build();
+        return Response.ok(result).build();
     }
 
     @GET
@@ -76,7 +76,7 @@ public class Book {
 
         }
         result += "]})";
-        return Response.status(200).build();
+        return Response.ok(result).build();
     }
 
     @GET
@@ -97,7 +97,7 @@ public class Book {
 
         }
         result += "]})";
-        return Response.status(200).build();
+        return Response.ok(result).build();
     }
     @GET
     @Path("/author/{name}")     //input bookname output author
@@ -106,7 +106,7 @@ public class Book {
 
         String name = new MySQL().getName(genre);
         String result = "{\"name\":\""+name+"\"}";
-        return Response.status(200).build();
+        return Response.ok(result).build();
     }
 
     @GET
@@ -127,7 +127,7 @@ public class Book {
         }
         result+="]})";
 
-        return Response.status(200).build();
+        return Response.ok(result).build();
     }
 
     @GET
@@ -148,7 +148,7 @@ public class Book {
         }
         result+="]})";
 
-        return Response.status(200).build();
+        return Response.ok(result).build();
     }
     @GET
     @Path("/borrowedby/{user}")     //input username output all borrowed book
@@ -188,7 +188,7 @@ public class Book {
         }
 
         result+="]})";
-        return Response.status(200).build();
+        return Response.ok(result).build();
     }
 
     @GET
@@ -209,7 +209,7 @@ public class Book {
         }
 
         result+="]})";
-        return Response.status(200).build();
+        return Response.ok(result).build();
     }
 
     @GET
