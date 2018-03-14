@@ -3,6 +3,7 @@
 		width: 80%;
 	    margin-top: 30%;
 	}
+
 }
 
 @media only screen and (max-width: 1050px) {
@@ -72,12 +73,26 @@
 	footer {
 		padding: 30px 20px;
 	}
+	#signUp input{
+		width: 70%;
+	}
+	#button button{
+		width: 74%;
+	}
+	#signUp #logoLibrary {
+    max-width: 70%;
+	}
+	#signUp .line{
+	margin: 15px auto 10px;
+	width: calc(68% + 20px);
+	}
 }
 
 @media only screen and (max-width: 768px) {
 	/*INDEX*/
-	#indexNav {
-		display: none;	
+	#leftNav,
+	#rightNav {
+		display: none;
 	}
 
 	#indexNav img {
@@ -161,13 +176,14 @@
 	footer {
 		padding: 30px 20px;
 	}
-
-	.menuBtn img {
-		width: 40px;
-		padding: 15px;
-		z-index: 10000;
-		display: inline-block;
+	#signUp #logoLibrary {
+    max-width: 60%;
 	}
+
+	#signUp {
+    width: 80%;
+    }
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -238,11 +254,11 @@
 	#contactWrapper {
 		left: 0;
 	    margin: 15% auto 0;
-	    width: 85%;
+	    width: 80%;
 	}
 
 	.whereToFindUsHeader {
-		font-size: 35px;
+		font-size: 40px;
 	}
 
 	#map {
@@ -267,7 +283,7 @@
 	}
 
 	#signUp #logoLibrary {
-    	max-width: 60%;
+    	max-width: 55%;
 	}
 
 	.about input {
