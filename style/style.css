@@ -384,4 +384,24 @@ footer .footer {
 	letter-spacing: 1px;
 	text-align: center;
 }
+footer a{
+	text-decoration: none;
+	color: black;
+	font-size: 13px;
+	letter-spacing: 1px;
+	text-align: center;
+}
 
+footer a:hover{
+	text-decoration: none;
+	color: #993636;
+	font-size: 13px;
+	letter-spacing: 1px;
+	text-align: center;
+}
+#leftNav a:hover{
+color:rgba(255, 255, 255,0.5)
+}
+#rightNav a:hover{
+	color:rgba(255, 255, 255,0.5)
+}
