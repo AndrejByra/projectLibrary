@@ -47,10 +47,13 @@
 	});
 
 	function Books (data){
-		console.log(data.Books.length);
+		console.log(data.Books);
 		for (var i = 0; i < data.Books.length; i++) {
 			$("#loanedBook").append("<div class='infoW'><div class='infoHeader'>Name of book</div><span>"+data.Books[i]+"</span></div>");
 		}
+
+
 	}
+
 
 })(jQuery);

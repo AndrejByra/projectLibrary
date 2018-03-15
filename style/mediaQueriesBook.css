@@ -24,6 +24,10 @@
         font-size: 16px;
 	    padding: 3px 20px;
 	}
+
+	#bookWrapper {
+		max-width: 80%;
+	}
 }
 
 @media only screen and (max-width: 768px) {
@@ -71,10 +75,6 @@
 	    width: calc(33.333333333333333% - 14px);
 	}
 
-}
-
-@media only screen and (max-width: 520px) {
-		
 	#infoWrapper {
 		max-width: 95%;
 	}
@@ -101,4 +101,11 @@
 	#aboutBook {
 	    width: calc(100% - 40px);
 	}
+}
+
+@media only screen and (max-width: 520px) {
+	#bookOverlay {
+		width: 90%;
+	}
+		
 }

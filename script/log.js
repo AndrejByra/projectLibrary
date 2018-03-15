@@ -68,7 +68,6 @@
 
 
 	$("#sendBtn").click(function(event){
-		event.preventDefault();
 
 		// VERIFICATION
 
@@ -85,24 +84,54 @@
 			townCity = $("#townCity").val(),
 			postcode = $("#postcode").val(),
 			phoneNumberRegex = /^(\d{9,20})$/,
-			phoneNumber = $("#phoneNumber").val();
-		
+			phoneNumber = $("#phoneNumber").val(),
+			checkbox = $("#check").val();		
 		// SIGN UP REQUEST
 			var settings = {
-		  		"async": true,
-		  		"crossDomain": true,
-		  		"url": "http://localhost:8080/login/registration",
-		  		"method": "POST",
-		  		"headers": {
-		    		"content-type": "application/json",
-	   			},
-		  		"processData": false,
-		  		"data": "{\n\t\"name\":\""+firstName+"\",\n\t\"surename\":\""+lastName+"\",\n\t\"username\":\""+login+
-		  		"\",\n\t\"password\":\""+password+"\",\n\t\"phone\":\""+phoneNumber+"\",\n\t\"email\":\""+email+
-		  		"\",\n\t\"address\":\""+addressLine+"\",\n\t\"city\":\""+townCity+"\",\n\t\"postcode\":\""+postcode+"\"\n}"
+			  "async": true,
+			  "crossDomain": true,
+			  "url": "http://localhost:8080/login/userexist/"+login,
+			  "method": "GET",
+			  "headers": {
+			    "content-type": "application/json",
+			    "cache-control": "no-cache",
+			  },
+			  "processData": false,
 			}
+
+			$.ajax(settings).done(function (response) {
+				if(response == true){
+					localStorage.setItem("error", response);
+					alert("Login already exists");
+				}
+				else if(response == false){
+					localStorage.setItem("error", false);
+				}
+
+			});
+
+			var settings = {
+			  "async": true,
+			  "crossDomain": true,
+			  "url": "http://localhost:8080/login/emailexist/" +email,
+			  "method": "GET",
+			  "headers": {
+			    "content-type": "application/json",
+			    "cache-control": "no-cache",
+			  },
+			  "processData": false,
+			}
+
+			$.ajax(settings).done(function (response) {
+			  if(response == true){
+					localStorage.setItem("errorEmail", response);
+					alert("Email address already exists");
+				}
+				else if(response == false){
+					localStorage.setItem("errorEmail", false);
+				}
+			});
 			
-		$.ajax(settings).done(function (data) {
 			var error = false;
 			if(emailRegex.test(emailValue) == false){	
 				$(".emailErr").text("Invalid email address.");
@@ -150,14 +179,41 @@
 			}
 			else 
 				$(".addressErr").text("");
+
+			if (!$('#check').is(":checked")){
+				$(".checkErr").text("Please indicate that you have read and agree to the terms of service.");
+				error = true;
+			}
+			else {
+				$(".checkErr").text("");
+			}
 			
-			if(error == false) 
-				$("#overlay").fadeIn(150);
+			// if(error == false && userexist == false && emailexist == false) {
+			var userexist = localStorage.getItem("error"),
+				emailexist = localStorage.getItem("errorEmail");
+
+				var settings = {
+			  		"async": true,
+			  		"crossDomain": true,
+			  		"url": "http://localhost:8080/login/registration",
+			  		"method": "POST",
+			  		"headers": {
+			    		"content-type": "application/json",
+		   			},
+			  		"processData": false,
+			  		"data": "{\n\t\"name\":\""+firstName+"\",\n\t\"surename\":\""+lastName+"\",\n\t\"username\":\""+login+
+			  		"\",\n\t\"password\":\""+password+"\",\n\t\"phone\":\""+phoneNumber+"\",\n\t\"email\":\""+email+
+			  		"\",\n\t\"address\":\""+addressLine+"\",\n\t\"city\":\""+townCity+"\",\n\t\"postcode\":\""+postcode+"\"\n}"
+				}
 			
-		}).fail(function(data){
-			alert("Registation failed. Try again");
-			$("input").val("");
-		});
+				$.ajax(settings).done(function (data) {
+					$("#overlay").fadeIn(150);
+				}).fail(function(data){
+					console.log(data);
+					alert("Registation failed. Try again");
+					$("input").val("");
+				});
+			// }
 
 	});
 

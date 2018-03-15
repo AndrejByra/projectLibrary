@@ -89,7 +89,12 @@ body {
 	letter-spacing: 1px;
 	font-size: 17px;
 	margin: 0 15px;
+	transition: all .1s ease-in-out;
 }
+#indexNav a:hover {
+	color: rgba(255,255,255, .7);
+}
+
 #leftNav a:first-child {
 	margin-left: 0;
 }
@@ -384,24 +389,8 @@ footer .footer {
 	letter-spacing: 1px;
 	text-align: center;
 }
-footer a{
-	text-decoration: none;
-	color: black;
-	font-size: 13px;
-	letter-spacing: 1px;
-	text-align: center;
+
+.footer a {
+	color: #8E8E8E;
 }
 
-footer a:hover{
-	text-decoration: none;
-	color: #993636;
-	font-size: 13px;
-	letter-spacing: 1px;
-	text-align: center;
-}
-#leftNav a:hover{
-color:rgba(255, 255, 255,0.5)
-}
-#rightNav a:hover{
-	color:rgba(255, 255, 255,0.5)
-}

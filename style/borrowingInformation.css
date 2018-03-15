@@ -24,7 +24,6 @@ body {
     text-decoration: none;
     color: #fff;
     text-transform: uppercase;
-    font-family: Roboto Condensed Regular, sans-serif;
     letter-spacing: 1px;
     font-size: 17px;
     transition: all .15s ease-in-out;
@@ -32,6 +31,7 @@ body {
 
 #rightNav a {
     margin: 0 15px;
+    
 }
 
 #leftNav a:first-child {
@@ -42,6 +42,7 @@ body {
 #rightNav {
     width: calc(50% - 72px);
     display: inline-block;    
+
 }
 
 #leftNav {

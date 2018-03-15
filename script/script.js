@@ -40,7 +40,7 @@
 	});
 
 	$(window).scroll(function(){
-        if($(window).scrollTop() > $(window).height()/2+40){
+        if($(window).scrollTop() > $(window).height()/2+45){
             $("#navLogo img").stop().fadeIn(200);
         }
         else {

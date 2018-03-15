@@ -59,7 +59,7 @@ body {
 
 #leftNav,
 #rightNav {
-	width: calc(50% - 72px);
+	width: calc(50% - 73px);
 	display: inline-block;    
 }
 
@@ -149,7 +149,7 @@ body {
 	position: relative;
 	top: 70px;
 	max-width: 90%;
-	margin: 55px auto;
+	margin: 55px auto 120px;
 }
 
 #books .book {
@@ -380,4 +380,56 @@ span.bookName {
 
 #libraryDropDownContent a:nth-child(1n) {
 	background-color: #F8F8F8;
+}
+
+#haveDone {
+	background-color: rgba(0,0,0,.3);
+	text-shadow: 0 0 2px #fff;
+	position: fixed;
+	top: 0; left: 0; right: 0; bottom: 0;
+	color: #2B2B2B;
+	font-size: 28px;
+	display: none;
+}
+
+#bookLended {
+	text-transform: uppercase;
+	letter-spacing: .3px;
+}
+
+#haveDone button {
+	font-family: Roboto Condensed Regular, sans-serif;
+	border: 0;
+	font-size: 19px;
+	width: 100%;
+	font-weight: bold;
+	padding: 22px 0;
+	background-color: #993636;
+	border-radius: 5px;
+	text-transform: uppercase;
+	transition: all .3s ease-in-out;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	margin-top: 25px;
+	cursor: pointer;
+}
+
+#haveDone button a {
+	text-decoration: none;
+	color: #fff;
+}
+#haveDone button:hover {
+	background-color: #8F2D2D;
+}
+
+#bookOverlay {
+	position: relative;
+	text-align: center;
+	top: 40%;
+	background-color: #fff;
+	width: 35%;
+	padding: 25px 0 0;
+	border-radius: 5px;
+	box-shadow: 0 0 10px #333333;
+	margin: auto;
 }

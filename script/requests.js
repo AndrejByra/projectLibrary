@@ -1,5 +1,9 @@
 (function($){
 
+	$(".succesBtn").click(function(){
+		window.location.href = "../html/bookLend.html";
+	});
+
 	$("#logoutBtn, .logoutBtn").click(function(){
 		var retrievedObject = JSON.parse(localStorage.getItem('user'));
 		var user = { 'login': '',
@@ -110,6 +114,9 @@
 		$("#books").fadeOut(500);
 		console.log(bookName);
 
+		var book = { 'name': bookName };
+			localStorage.setItem('book', JSON.stringify(book));
+
 		$.ajax({
 			url: 'http://localhost:8080/book/info/' +bookName,
 			data: { },
@@ -132,7 +139,7 @@
 			if(data.all[5] == 0)
 				status = "<div id='available'>Available</div><div id='borrow'><button>Borrow</button></div>";
 			else 
-				status = "<div id='notAvailable' class=''>Not available</div>";
+				status = "<div id='notAvailable' class='notAvailable'>Borrowed</div>";
 
 			$("#bookWrapper").append("<div id='cover'><img src='../img/books/"+data.all[0]+".jpg'></div>");
 			$("#bookWrapper").append("<div id='aboutBook' class=''>"+
@@ -144,45 +151,52 @@
 				status+"</div>");
 		}
 
-		$.ajax({
-			url: 'http://localhost:8080/book/time/' +bookName,
-			data: { },
-			error: function(){
-				alert("Error time");
-			},
-			success: getDate,
-			crossDomain: true,
-			dataType: 'jsonp',
-			jsonpCallback: 'getDate',
-				contentType: 'application/json',
-				type: 'GET'
+		// $.ajax({
+		// 	url: 'http://localhost:8080/book/time/' +bookName,
+		// 	data: { },
+		// 	error: function(){
+		// 		alert("Error time");
+		// 	},
+		// 	success: getDate,
+		// 	crossDomain: true,
+		// 	dataType: 'jsonp',
+		// 	jsonpCallback: 'getDate',
+		// 		contentType: 'application/json',
+		// 		type: 'GET'
+		// });
+
+
+
+		// function getDate(data){
+
+		// 	var countDownDate = new Date(data.date[0]).getTime();
+
+		//     var now = new Date().getTime();
+		//     var distance = countDownDate - now;
+			    
+		//     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			
+		// 	$("#bookWrapper").find(".notAvailable").text("Available in " +days+ " days");
+		// }
+
+		var userLogin = JSON.parse(localStorage.getItem('user'));
+
+		var settings = {
+		  "async": true,
+		  "crossDomain": true,
+		  "url": "http://localhost:8080/book/numofbook/"+userLogin.login,
+		  "method": "GET",
+		  "headers": {
+		    "content-type": "application/json",
+		    "cache-control": "no-cache",
+		  },
+		  "processData": false,
+		}
+
+		$.ajax(settings).done(function (response) {
+			localStorage.setItem("numOfBook", response);
 		});
 
-		function getDate(data){
-			$("#bookWrapper").find("#notAvailable").empty();
-
-			var countDownDate = new Date(data.date[0]).getTime();
-
-			var x = setInterval(function() {
-			    var now = new Date().getTime();
-			    var distance = countDownDate - now;
-				    
-			    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-			    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-			    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-			    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-				
-			    $("#bookWrapper").find("#notAvailable").text("Available in " + days + " days");
-
-			    if (distance < 0) {
-		 		    clearInterval(x);
-		    		$("#demo").text("EXPIRED");
-				}
-			
-			}, 1000);
-
-			console.log(data.date[0]);
-		}
 	
 		$("#bookWrapper").delay(1000).fadeIn(500);
 	});
@@ -222,6 +236,85 @@
 		$("#bookWrapper").hide();
 		$("#infoWrapper").delay(500).fadeIn(100);
 		$("#nav").css({	"border-bottom" : "7px solid #e5e5e5" });
+	});
+
+	$("#bookWrapper").click(".brwBtn", function(){
+		var retrievedObject = JSON.parse(localStorage.getItem('user'));
+		$.ajax({
+			url: 'http://localhost:8080/book/getidu/' +retrievedObject.login,
+			error: function(){
+				alert("Error");
+			},
+			success: getName,
+			crossDomain: true,
+			dataType: 'jsonp',
+			jsonpCallback: 'getName',
+				contentType: 'application/json',
+				type: 'GET'
+		});
+
+		function getName(data){
+			var userId = { 'id': data.name[0] };
+			localStorage.setItem('userId', JSON.stringify(userId));
+		}
+
+		var retrievedObject = JSON.parse(localStorage.getItem('book'));
+		$.ajax({
+			url: 'http://localhost:8080/book/getidb/' +retrievedObject.name,
+			error: function(){
+				alert("Error");
+			},
+			success: getBook,
+			crossDomain: true,
+			dataType: 'jsonp',
+			jsonpCallback: 'getBook',
+				contentType: 'application/json',
+				type: 'GET'
+		});
+
+		function getBook(data){
+			console.log(data);
+			var bookId = { 'id': data.name[0] };
+			localStorage.setItem('bookId', JSON.stringify(bookId));
+
+		}
+
+
+		function ajaxR(){
+
+			var userObj = (JSON.parse(localStorage.getItem("userId")));
+			var bookObj = (JSON.parse(localStorage.getItem("bookId")));
+			console.log(userObj.id, bookObj.id);
+
+			var numOfBook = localStorage.getItem("numOfBook");
+			console.log("Num of books " +numOfBook);
+
+			if(numOfBook == "false"){
+				var settings = {
+				  "async": true,
+				  "crossDomain": true,
+				  "url": "http://localhost:8080/book/lendbook",
+				  "method": "POST",
+				  "headers": {
+				    "content-type": "application/json",
+				    "cache-control": "no-cache",
+				  },
+				  "processData": false,
+				  "data": "{\"idb\":\""+bookObj.id+"\",\"idu\":\""+userObj.id+"\"}"
+				}
+
+				$.ajax(settings).done(function (response) {
+				  	console.log(response);
+				  	$("#haveDone").fadeIn(150);
+				}).fail(function(data){
+					alert("Error lend a book. Try again.");
+				});
+			}
+			else {
+				alert("Too much books! You can borrow max 3 books.");
+			}
+		}
+		setTimeout(ajaxR, 100);
 	});
 
 

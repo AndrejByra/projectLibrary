@@ -3,7 +3,6 @@
 		width: 80%;
 	    margin-top: 30%;
 	}
-
 }
 
 @media only screen and (max-width: 1050px) {
@@ -73,26 +72,12 @@
 	footer {
 		padding: 30px 20px;
 	}
-	#signUp input{
-		width: 70%;
-	}
-	#button button{
-		width: 74%;
-	}
-	#signUp #logoLibrary {
-    max-width: 70%;
-	}
-	#signUp .line{
-	margin: 15px auto 10px;
-	width: calc(68% + 20px);
-	}
 }
 
 @media only screen and (max-width: 768px) {
 	/*INDEX*/
-	#leftNav,
-	#rightNav {
-		display: none;
+	#indexNav {
+		display: none;	
 	}
 
 	#indexNav img {
@@ -176,14 +161,13 @@
 	footer {
 		padding: 30px 20px;
 	}
-	#signUp #logoLibrary {
-    max-width: 60%;
+
+	.menuBtn img {
+		width: 40px;
+		padding: 15px;
+		z-index: 10000;
+		display: inline-block;
 	}
-
-	#signUp {
-    width: 80%;
-    }
-
 }
 
 @media only screen and (max-width: 600px) {
@@ -254,11 +238,11 @@
 	#contactWrapper {
 		left: 0;
 	    margin: 15% auto 0;
-	    width: 80%;
+	    width: 85%;
 	}
 
 	.whereToFindUsHeader {
-		font-size: 40px;
+		font-size: 35px;
 	}
 
 	#map {
@@ -283,7 +267,7 @@
 	}
 
 	#signUp #logoLibrary {
-    	max-width: 55%;
+    	max-width: 60%;
 	}
 
 	.about input {
@@ -303,17 +287,6 @@
 	#button button {
 	    width: calc(70% + 20px);
 	}
-
-@media only screen and (max-width: 391px) {
-	.whereToFindUsHeader {
-	font-size: 30px;
-}
-}
-@media only screen and (max-width: 300px) {
-	.whereToFindUsHeader {
-	font-size: 25px;
-}
-}
 
 
 }

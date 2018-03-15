@@ -272,3 +272,24 @@ body {
 	width: calc(60% - 15px);
 	margin: auto;
 }
+
+#checkBox {
+	text-align: left;
+	width: 58%;
+	padding-top: 10px;
+	margin: auto;
+}
+
+#checkBox span {
+	position: relative;
+	left: -15px;
+}
+
+#checkBox span a {
+	color: #8E8E8E;
+}
+
+#checkBox input {
+	position: relative;
+	left: -15px;
+}
